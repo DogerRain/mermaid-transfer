@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid 在线渲染 - 流程图时序图甘特图实时预览编辑器</title>
+    <meta
+      name="description"
+      content="免费 Mermaid 在线编辑器：实时预览流程图、时序图、甘特图、类图、状态图、ER 图、思维导图等，支持主题切换、手绘风格、导出 SVG 与 PNG。"
+    />
+    <meta
+      name="keywords"
+      content="Mermaid,Mermaid在线,Mermaid编辑器,Mermaid在线渲染,Mermaid流程图,Mermaid时序图,Mermaid甘特图,Mermaid类图,Mermaid状态图,Mermaid ER图,Mermaid思维导图,Mermaid导出PNG,Mermaid导出SVG,Mermaid实时预览,流程图在线,时序图在线,甘特图在线,UML在线,图表代码编辑器,文本转流程图"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mermaid 在线渲染" />
+    <link rel="canonical" href="/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mermaid 在线渲染 - 实时预览图表编辑器" />
+    <meta
+      property="og:description"
+      content="在线编写 Mermaid 代码，实时预览并导出 SVG / PNG，支持流程图、时序图、甘特图等多种图表。"
+    />
+    <meta property="og:image" content="/icon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Mermaid 在线渲染" />
+    <meta
+      name="twitter:description"
+      content="Mermaid 在线编辑器：实时预览流程图、时序图、甘特图，支持导出 SVG / PNG。"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mermaid 在线渲染",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "description": "免费在线 Mermaid 图表编辑器，支持实时预览与导出 SVG、PNG。",
+        "keywords": "Mermaid, 流程图, 时序图, 甘特图, 在线编辑器",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <defs>
+            <linearGradient id="brand-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="url(#brand-bg)"/>
+          <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="12" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M19 24v4h13v4"/>
+            <rect x="24" y="32" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M33 44v4h13"/>
+            <polygon points="46,48 52,45 46,42" fill="#fff" stroke="none"/>
+            <rect x="36" y="12" width="18" height="12" rx="6" fill="#fffbeb" stroke="#fef3c7"/>
+          </g>
+        </svg>
+        <span class="brand-title">Mermaid 在线渲染</span>
+      </div>
+      <a
+        class="header-blog-link"
+        href="https://learnjava.baimuxym.cn/"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="访问 HelloCoder 博客"
+      >HelloCoder</a>
+    </header>
+
+    <main class="workspace">
+      <aside class="editor-panel">
+        <div class="panel-toolbar">
+          <label class="field-label" for="theme-select">图表主题</label>
+          <select id="theme-select" class="select">
+            <option value="default">Default · 经典蓝</option>
+            <option value="neutral">Neutral · 中性灰</option>
+            <option value="dark">Dark · 深色</option>
+            <option value="forest">Forest · 森林绿</option>
+            <option value="base">Base · 简约底</option>
+          </select>
+          <label class="field-label" for="template-select">示例模板</label>
+          <select id="template-select" class="select">
+            <option value="">选择模板…</option>
+            <option value="flowchart">流程图 · 纵向</option>
+            <option value="flowchartLR">流程图 · 横向</option>
+            <option value="sequence">时序图</option>
+            <option value="gantt">甘特图</option>
+            <option value="class">类图</option>
+            <option value="state">状态图</option>
+            <option value="er">ER 图</option>
+            <option value="pie">饼图</option>
+            <option value="mindmap">思维导图</option>
+            <option value="timeline">时间线</option>
+            <option value="journey">用户旅程图</option>
+            <option value="gitGraph">Git 分支图</option>
+            <option value="quadrant">象限图</option>
+            <option value="requirement">需求图</option>
+            <option value="sankey">桑基图</option>
+            <option value="block">块图</option>
+          </select>
+        </div>
+        <div class="editor-wrap">
+          <textarea
+            id="editor"
+            class="editor"
+            spellcheck="false"
+            aria-label="Mermaid 源码"
+          ></textarea>
+        </div>
+        <div class="editor-status">
+          <span id="status-text">就绪</span>
+        </div>
+      </aside>
+
+      <div class="resizer" id="resizer" title="拖动调整宽度" aria-hidden="true"></div>
+
+      <section class="preview-panel">
+        <div class="preview-toolbar">
+          <div class="zoom-controls">
+            <button type="button" class="btn btn-icon" id="zoom-out" title="缩小">−</button>
+            <span class="zoom-label" id="zoom-label">100%</span>
+            <button type="button" class="btn btn-icon" id="zoom-in" title="放大">+</button>
+            <button type="button" class="btn" id="zoom-reset" title="适应窗口">适应</button>
+            <button type="button" class="btn" id="zoom-100" title="100% 显示">1:1</button>
+          </div>
+          <div class="export-controls">
+            <button type="button" class="btn btn-primary" id="export-svg">导出 SVG</button>
+            <button type="button" class="btn btn-primary" id="export-png">导出 PNG</button>
+          </div>
+        </div>
+        <div class="preview-viewport" id="preview-viewport">
+          <div class="preview-stage" id="preview-stage">
+            <div id="mermaid-output" class="mermaid-output"></div>
+          </div>
+          <div id="error-banner" class="error-banner hidden" role="alert"></div>
+          <div class="preview-switches" aria-label="预览样式开关">
+            <button type="button" class="switch-btn" id="toggle-handdrawn" title="手绘风格">
+              ✎
+            </button>
+            <button type="button" class="switch-btn is-active" id="toggle-grid" title="网格背景">
+              #
+            </button>
+          </div>
+          <p class="preview-hint">滚轮缩放 · 拖拽平移 · 双击重置视图</p>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
