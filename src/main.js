@@ -159,6 +159,14 @@ const uiState = {
 
 const SAFE_FONT_FAMILY = '"Microsoft YaHei", Arial, sans-serif';
 
+const THEME_BACKGROUNDS = {
+  default: '#ffffff',
+  neutral: '#f8f8f8',
+  dark: '#1f2937',
+  forest: '#1e1e1e',
+  base: '#ffffff',
+};
+
 let renderId = 0;
 let debounceTimer = null;
 let currentSvg = null;
@@ -333,40 +341,173 @@ function getExportSvgPayload(forPng = false) {
   clone.setAttribute('width', `${width}`);
   clone.setAttribute('height', `${height}`);
 
-  if (forPng) {
-    prepareSvgForPngExport(clone);
-  } else {
-    prepareSvgForSvgExport(clone);
-  }
+  prepareSvgForExport(clone, currentSvg, forPng);
+
+  // 彻底移除所有可能的背景矩形
+  clone.querySelectorAll('rect').forEach(rect => {
+    const fill = (rect.getAttribute('fill') || '').trim().toLowerCase();
+    const classes = (rect.className?.baseVal || rect.className?.toString?.() || '').toLowerCase();
+    const parentClasses = (rect.parentNode?.className?.baseVal || rect.parentNode?.className?.toString?.() || '').toLowerCase();
+
+    const isBackground =
+      classes.includes('background') ||
+      parentClasses.includes('background') ||
+      fill === '#ffffff' ||
+      fill === 'white' ||
+      fill === '#fff' ||
+      fill === 'rgb(255, 255, 255)' ||
+      fill === 'rgba(255, 255, 255, 1)';
+
+    if (isBackground) {
+      rect.remove();
+    }
+  });
+
+  // 添加统一的白色背景矩形
+  const svgNs = 'http://www.w3.org/2000/svg';
+  const bgRect = document.createElementNS(svgNs, 'rect');
+  bgRect.setAttribute('x', String(minX));
+  bgRect.setAttribute('y', String(minY));
+  bgRect.setAttribute('width', String(width));
+  bgRect.setAttribute('height', String(height));
+  bgRect.setAttribute('fill', '#ffffff');
+  clone.insertBefore(bgRect, clone.firstChild);
 
   return {
     svg: new XMLSerializer().serializeToString(clone),
     width,
     height,
+    background: '#ffffff',
   };
 }
 
-function prepareSvgForSvgExport(svgRoot) {
-  svgRoot.querySelectorAll('script').forEach((node) => node.remove());
+const SVG_SHAPE_TAGS = new Set([
+  'path',
+  'rect',
+  'circle',
+  'ellipse',
+  'polygon',
+  'polyline',
+  'line',
+  'text',
+  'tspan',
+]);
+
+function getSvgBackgroundColor(svgElement, theme) {
+  // 优先使用主题对应的背景颜色，确保导出时背景正确
+  if (theme && THEME_BACKGROUNDS[theme]) {
+    return THEME_BACKGROUNDS[theme];
+  }
+  const bgRect =
+    svgElement.querySelector('rect.background') ||
+    svgElement.querySelector('.background rect') ||
+    svgElement.querySelector('g.background > rect');
+  if (bgRect) {
+    const fill = window.getComputedStyle(bgRect).fill;
+    if (fill && fill !== 'none') return fill;
+  }
+  const bg = window.getComputedStyle(svgElement).backgroundColor;
+  if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+    return bg;
+  }
+  return '#ffffff';
 }
 
-function parseInlineStyle(element, property, fallback) {
-  const style = element?.getAttribute?.('style') || '';
-  const regex = new RegExp(`(?:^|;)\\s*${property}\\s*:\\s*([^;]+)`, 'i');
-  const match = style.match(regex);
-  return match ? match[1].trim() : fallback;
+function embedComputedStyles(targetRoot, sourceRoot) {
+  function walk(source, target) {
+    if (!source || !target || source.nodeType !== 1 || target.nodeType !== 1) return;
+
+    const tag = target.tagName.toLowerCase();
+    const computed = window.getComputedStyle(source);
+
+    // 跳过所有可能的背景矩形，保持透明
+    if (tag === 'rect') {
+      const parent = target.parentNode;
+      const classes = (target.className?.baseVal || target.className?.toString?.() || '').toLowerCase();
+      const parentClasses = (parent?.className?.baseVal || parent?.className?.toString?.() || '').toLowerCase();
+      const width = parseFloat(target.getAttribute('width') || '0');
+      const height = parseFloat(target.getAttribute('height') || '0');
+      const fill = computed.fill || '';
+
+      // 判断是否为背景矩形：
+      // 1. 有 background 类名
+      // 2. fill 为白色且尺寸较大（可能是背景）
+      const isBackground =
+        classes.includes('background') ||
+        parentClasses.includes('background') ||
+        (parent?.tagName?.toLowerCase() === 'g' && parentClasses.includes('background')) ||
+        (width > 0 && height > 0 && (fill === '#ffffff' || fill === 'white' || fill === 'rgb(255, 255, 255)'));
+      if (isBackground) {
+        return;
+      }
+    }
+
+    if (SVG_SHAPE_TAGS.has(tag)) {
+      const fill = computed.fill;
+      const stroke = computed.stroke;
+      const strokeWidth = computed.strokeWidth;
+
+      if (fill) {
+        target.style.fill = fill;
+        if (fill !== 'none') target.setAttribute('fill', fill);
+      }
+      if (stroke && stroke !== 'none') {
+        target.style.stroke = stroke;
+        target.setAttribute('stroke', stroke);
+      } else if (stroke === 'none') {
+        target.style.stroke = 'none';
+        target.setAttribute('stroke', 'none');
+      }
+      if (strokeWidth) {
+        target.style.strokeWidth = strokeWidth;
+        target.setAttribute('stroke-width', strokeWidth);
+      }
+
+      const dash = computed.strokeDasharray;
+      if (dash && dash !== 'none') {
+        target.style.strokeDasharray = dash;
+        target.setAttribute('stroke-dasharray', dash);
+      }
+
+      const opacity = computed.opacity;
+      if (opacity && opacity !== '1') {
+        target.style.opacity = opacity;
+      }
+    }
+
+    if (tag === 'text' || tag === 'tspan') {
+      target.style.fill = computed.fill || computed.color;
+      target.setAttribute('fill', computed.fill || computed.color);
+      target.style.fontFamily = SAFE_FONT_FAMILY;
+      target.style.fontSize = computed.fontSize;
+      target.style.fontWeight = computed.fontWeight;
+      target.setAttribute('font-family', SAFE_FONT_FAMILY);
+      if (computed.fontSize) target.setAttribute('font-size', computed.fontSize);
+    }
+
+    const sourceChildren = [...source.children];
+    const targetChildren = [...target.children];
+    sourceChildren.forEach((srcChild, index) => {
+      if (targetChildren[index]) walk(srcChild, targetChildren[index]);
+    });
+  }
+
+  walk(sourceRoot, targetRoot);
 }
 
-function convertForeignObjectsToText(svgRoot) {
+function convertForeignObjectsToText(svgRoot, sourceSvg) {
   const svgNs = 'http://www.w3.org/2000/svg';
-  const foreignObjects = [...svgRoot.querySelectorAll('foreignObject')];
+  const sourceFos = [...sourceSvg.querySelectorAll('foreignObject')];
+  const cloneFos = [...svgRoot.querySelectorAll('foreignObject')];
 
-  foreignObjects.forEach((fo) => {
+  cloneFos.forEach((fo, index) => {
+    const sourceFo = sourceFos[index];
     const x = Number.parseFloat(fo.getAttribute('x') || '0');
     const y = Number.parseFloat(fo.getAttribute('y') || '0');
     const width = Number.parseFloat(fo.getAttribute('width') || '0');
     const height = Number.parseFloat(fo.getAttribute('height') || '0');
-    const contentRoot = fo.querySelector('div, span, p') || fo;
+    const contentRoot = sourceFo?.querySelector('div, span, p') || sourceFo;
+    const computed = contentRoot ? window.getComputedStyle(contentRoot) : null;
     const lines = (fo.textContent || '')
       .split('\n')
       .map((line) => line.trim())
@@ -377,30 +518,35 @@ function convertForeignObjectsToText(svgRoot) {
       return;
     }
 
-    const fontSize = Number.parseFloat(parseInlineStyle(contentRoot, 'font-size', '14px')) || 14;
-    const fill = parseInlineStyle(contentRoot, 'color', '#333333');
+    const fontSize = Number.parseFloat(computed?.fontSize || '14') || 14;
+    const fill = computed?.color || '#333333';
     const text = document.createElementNS(svgNs, 'text');
     const centerX = x + width / 2;
-    const centerY = y + height / 2;
 
     text.setAttribute('font-family', SAFE_FONT_FAMILY);
     text.setAttribute('font-size', String(fontSize));
     text.setAttribute('fill', fill);
     text.setAttribute('text-anchor', 'middle');
 
+    // 使用 dy 属性进行精确的垂直居中，兼容性更好
+    const baselineOffset = fontSize * 0.35; // 近似的基线偏移量
+
     if (lines.length === 1) {
       text.setAttribute('x', String(centerX));
-      text.setAttribute('y', String(centerY));
-      text.setAttribute('dominant-baseline', 'middle');
+      // 居中计算：y + height/2 是中心点，加上 baselineOffset 补偿基线到中心的距离
+      text.setAttribute('y', String(y + height / 2));
+      text.setAttribute('dy', String(baselineOffset));
       text.textContent = lines[0];
     } else {
       const lineHeight = fontSize * 1.2;
-      const startY = centerY - ((lines.length - 1) * lineHeight) / 2;
-      lines.forEach((line, index) => {
+      const totalTextHeight = (lines.length - 1) * lineHeight;
+      const startY = y + (height - totalTextHeight) / 2;
+      lines.forEach((line, lineIndex) => {
         const tspan = document.createElementNS(svgNs, 'tspan');
         tspan.setAttribute('x', String(centerX));
-        tspan.setAttribute('y', String(startY + index * lineHeight));
-        tspan.setAttribute('dominant-baseline', 'middle');
+        tspan.setAttribute('y', String(startY + lineIndex * lineHeight));
+        tspan.setAttribute('dy', String(baselineOffset));
+        tspan.setAttribute('fill', fill);
         tspan.textContent = line;
         text.appendChild(tspan);
       });
@@ -411,39 +557,31 @@ function convertForeignObjectsToText(svgRoot) {
   });
 }
 
-function prepareSvgForPngExport(svgRoot) {
-  convertForeignObjectsToText(svgRoot);
-  sanitizeSvgFonts(svgRoot);
-}
+/** 将当前主题的计算样式写入克隆 SVG，避免导出时丢失主题色 */
+function prepareSvgForExport(svgRoot, sourceSvg, forPng) {
+  embedComputedStyles(svgRoot, sourceSvg);
+  // SVG 和 PNG 导出都需要转换 foreignObject，以确保兼容性和正确的字体显示
+  convertForeignObjectsToText(svgRoot, sourceSvg);
 
-function sanitizeSvgFonts(svgRoot) {
+  // 特殊处理 Mermaid 的箭头和流程线
+  // Mermaid 使用 marker-end 和 CSS 类设置箭头颜色，需要将 marker 中的路径颜色也一并处理
+  svgRoot.querySelectorAll('marker path, marker polygon').forEach(path => {
+    const computed = window.getComputedStyle(path);
+    const fill = computed.fill;
+    if (fill) {
+      path.setAttribute('fill', fill);
+      path.style.fill = fill;
+    }
+  });
+
+  svgRoot.querySelectorAll('style').forEach((node) => node.remove());
   svgRoot.querySelectorAll('script').forEach((node) => node.remove());
 
-  svgRoot.querySelectorAll('style').forEach((styleNode) => {
-    let css = styleNode.textContent || '';
-    if (/@import|@font-face|url\(/i.test(css)) {
-      styleNode.remove();
-      return;
-    }
-    styleNode.textContent = css.replace(/font-family\s*:[^;{}]+/gi, `font-family: ${SAFE_FONT_FAMILY}`);
-  });
-
-  svgRoot.querySelectorAll('*').forEach((node) => {
-    const href = node.getAttribute('href') || node.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
-    if (href && /^https?:\/\//i.test(href)) {
-      node.remove();
-    }
-  });
-
-  svgRoot.setAttribute('font-family', SAFE_FONT_FAMILY);
-  svgRoot.style.fontFamily = SAFE_FONT_FAMILY;
-
-  svgRoot.querySelectorAll('text, tspan').forEach((node) => {
-    node.setAttribute('font-family', SAFE_FONT_FAMILY);
-    if (node.style) {
-      node.style.fontFamily = SAFE_FONT_FAMILY;
-    }
-  });
+  // 移除 SVG 元素上的所有背景相关样式
+  svgRoot.style.removeProperty('background');
+  svgRoot.style.removeProperty('background-color');
+  svgRoot.style.removeProperty('background-image');
+  svgRoot.removeAttribute('style');
 }
 
 function downloadDataUrl(dataUrl, filename) {
@@ -472,6 +610,7 @@ function drawSvgToPngDataUrl(payload, scale) {
           return;
         }
 
+        // 填充白色背景
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.scale(scale, scale);
