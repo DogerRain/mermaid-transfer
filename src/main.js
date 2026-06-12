@@ -1,4 +1,5 @@
 import mermaid from 'mermaid';
+import { t, getLang, setLang, initI18n } from './i18n.js';
 
 const DEFAULT_SOURCE = `graph TD
     A[开始] --> B{判断}
@@ -154,7 +155,7 @@ const gridToggle = document.getElementById('toggle-grid');
 
 const uiState = {
   handDrawn: false,
-  showGrid: true,
+  showGrid: false,
 };
 
 const SAFE_FONT_FAMILY = '"Microsoft YaHei", Arial, sans-serif';
@@ -268,12 +269,12 @@ async function renderDiagram() {
     currentSvg = null;
     view.baseWidth = 0;
     view.baseHeight = 0;
-    setStatus('请输入 Mermaid 代码');
+    setStatus(t('statusNeedInput'));
     showError(null);
     return;
   }
 
-  setStatus('渲染中…');
+  setStatus(t('statusRendering'));
 
   try {
     initMermaid(themeSelect.value);
@@ -286,7 +287,7 @@ async function renderDiagram() {
     view.x = 0;
     view.y = 0;
     cacheSvgBaseSize();
-    setStatus('渲染成功');
+    setStatus(t('statusRenderOk'));
     showError(null);
     requestAnimationFrame(() => {
       applyTransform();
@@ -295,7 +296,7 @@ async function renderDiagram() {
   } catch (err) {
     if (id !== renderId) return;
     const msg = err?.message || String(err);
-    setStatus('语法错误', true);
+    setStatus(t('statusSyntaxError'), true);
     showError(msg);
   }
 }
@@ -647,32 +648,32 @@ function downloadBlob(blob, filename) {
 function exportSvg() {
   const payload = getExportSvgPayload(false);
   if (!payload) {
-    setStatus('无可导出的图表', true);
+    setStatus(t('statusNoExport'), true);
     return;
   }
   const blob = new Blob([payload.svg], { type: 'image/svg+xml;charset=utf-8' });
   downloadBlob(blob, `mermaid-diagram-${Date.now()}.svg`);
-  setStatus('已导出 SVG');
+  setStatus(t('statusExportedSvg'));
 }
 
 function exportPng(scale = 2) {
   const payload = getExportSvgPayload(true);
   if (!payload) {
-    setStatus('无可导出的图表', true);
+    setStatus(t('statusNoExport'), true);
     return;
   }
 
-  setStatus('正在导出 PNG…');
+  setStatus(t('statusExportingPng'));
   drawSvgToPngDataUrl(payload, scale)
     .then((dataUrl) => {
       downloadDataUrl(dataUrl, `mermaid-diagram-${Date.now()}.png`);
-      setStatus('已导出 PNG');
+      setStatus(t('statusExportedPng'));
       showError(null);
     })
     .catch((err) => {
       const message = err?.message || String(err);
-      setStatus('PNG 导出失败', true);
-      showError(`PNG 导出失败：${message}\n建议先使用“导出 SVG”，或在浏览器中打开 SVG 后另存为 PNG。`);
+      setStatus(t('statusExportFail'), true);
+      showError(t('exportFailDetail', { msg: message }));
     });
 }
 
@@ -800,11 +801,29 @@ gridToggle.addEventListener('click', () => {
   updateSwitchButtons();
 });
 
+// 语言下拉切换
+const langDropdown = document.getElementById('lang-dropdown');
+const langMenu = document.getElementById('lang-menu');
+document.getElementById('lang-toggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  langDropdown.classList.toggle('open');
+});
+langMenu.querySelectorAll('.lang-option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    setLang(lang);
+    langDropdown.classList.remove('open');
+    renderDiagram();
+  });
+});
+document.addEventListener('click', () => langDropdown.classList.remove('open'));
+
 window.addEventListener('resize', () => {
   if (currentSvg) fitToView();
 });
 
 editor.value = DEFAULT_SOURCE;
+initI18n();
 initMermaid(themeSelect.value);
 setupPanZoom();
 setupResizer();
