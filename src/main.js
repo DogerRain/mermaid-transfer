@@ -520,7 +520,13 @@ function convertForeignObjectsToText(svgRoot, sourceSvg) {
     }
 
     const fontSize = Number.parseFloat(computed?.fontSize || '14') || 14;
-    const fill = computed?.color || '#333333';
+    // 如果 computed color 是浅色（接近白色），说明取到了背景色，回退到深色
+    let fill = computed?.color || '#333333';
+    const rgbMatch = fill?.match?.(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (rgbMatch) {
+      const [, r, g, b] = rgbMatch.map(Number);
+      if (r > 200 && g > 200 && b > 200) fill = '#333333';
+    }
     const text = document.createElementNS(svgNs, 'text');
     const centerX = x + width / 2;
 
