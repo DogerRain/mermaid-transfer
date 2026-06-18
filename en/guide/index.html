@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid Tutorial - Flowchart, Sequence & Gantt Syntax</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/guide.css" />
+  </head>
+  <body>
+    <header class="guide-header">
+      <a class="guide-brand" href="/en/">Mermaid Online</a>
+      <nav class="guide-nav">
+        <a class="guide-nav-link is-active" href="/en/guide/">Mermaid Guide</a>
+        <a class="guide-nav-link guide-nav-cta" href="/en/">Open Editor</a>
+      </nav>
+    </header>
+    <div class="guide-shell">
+      <aside class="guide-sidebar" id="guide-sidebar">
+        <div class="guide-sidebar-panel">
+          <div class="guide-toc-header">
+            <div class="guide-toc-title">
+              <svg class="guide-toc-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="12" r="1" fill="currentColor"/>
+          </svg>
+              <span class="guide-toc-heading">Contents</span>
+            </div>
+            <button type="button" class="guide-toc-toggle" id="guide-toc-toggle" aria-expanded="true" aria-controls="guide-toc-list" data-collapse="Collapse" data-expand="Expand">Collapse</button>
+          </div>
+          <nav class="guide-toc" aria-label="Contents">
+            <ol class="guide-toc-list" id="guide-toc-list">
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#flowchart" data-section="flowchart">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">1.</span>Flowchart</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sequence" data-section="sequence">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">2.</span>Sequence Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gantt" data-section="gantt">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">3.</span>Gantt Chart</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#class" data-section="class">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">4.</span>Class Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#state" data-section="state">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">5.</span>State Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#er" data-section="er">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">6.</span>ER Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#pie" data-section="pie">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">7.</span>Pie Chart</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#mindmap" data-section="mindmap">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">8.</span>Mindmap</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#timeline" data-section="timeline">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">9.</span>Timeline</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#journey" data-section="journey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">10.</span>User Journey</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gitgraph" data-section="gitgraph">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">11.</span>Git Graph</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#quadrant" data-section="quadrant">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">12.</span>Quadrant Chart</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#block" data-section="block">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">13.</span>Block Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sankey" data-section="sankey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">14.</span>Sankey Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#requirement" data-section="requirement">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">15.</span>Requirement Diagram</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#tips" data-section="tips">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">16.</span>Tips</span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </aside>
+      <main class="guide-main">
+        <article class="guide-article">
+          <header class="guide-article-header">
+            <h1>Mermaid Tutorial</h1>
+            <p class="guide-lead">Mermaid lets you create diagrams from text. This guide covers the most common diagram types with copy-paste examples you can try in the editor.</p>
+          </header>
+          <div class="guide-content">
+            <section class="guide-section" id="flowchart">
+        <h2>1. Flowchart</h2>
+        <p>Use graph or flowchart with TD (top-down) or LR (left-right).</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>graph TD
+    A[Start] --&gt; B{OK?}
+    B --&gt;|Yes| C[Run]
+    B --&gt;|No| D[End]
+    C --&gt; D</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sequence">
+        <h2>2. Sequence Diagram</h2>
+        <p>Show message order between participants.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sequenceDiagram
+    participant User
+    participant API
+    User-&gt;&gt;API: Request
+    API--&gt;&gt;User: Response</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gantt">
+        <h2>3. Gantt Chart</h2>
+        <p>Plan tasks over time with sections and durations.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gantt
+    title Plan
+    dateFormat YYYY-MM-DD
+    section Dev
+    Analysis :a1, 2025-01-01, 7d
+    Coding   :a2, after a1, 10d</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="class">
+        <h2>4. Class Diagram</h2>
+        <p>Use classDiagram for classes, attributes, methods, and inheritance.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>classDiagram
+    class Animal {
+        +String name
+        +makeSound()
+    }
+    class Dog {
+        +bark()
+    }
+    Animal &lt;|-- Dog</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="state">
+        <h2>5. State Diagram</h2>
+        <p>Use stateDiagram-v2 for states and transitions; [*] is start/end.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>stateDiagram-v2
+    [*] --&gt; Idle
+    Idle --&gt; Running: start
+    Running --&gt; Done: finish
+    Done --&gt; [*]</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="er">
+        <h2>6. ER Diagram</h2>
+        <p>Use erDiagram for entities and relationships; symbols like ||--o{ show cardinality.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    CUSTOMER {
+        string id
+        string name
+    }</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="pie">
+        <h2>7. Pie Chart</h2>
+        <p>Pie charts show proportions; each item is "label" : value.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>pie title Market Share
+    "Product A" : 42
+    "Product B" : 28
+    "Other" : 30</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="mindmap">
+        <h2>8. Mindmap</h2>
+        <p>Use mindmap for hierarchies; indentation defines child nodes.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>mindmap
+  root((Product))
+    Features
+      Auth
+    Tech
+      Frontend
+      Backend</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="timeline">
+        <h2>9. Timeline</h2>
+        <p>timeline lists events chronologically—great for milestones.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>timeline
+    title Project Milestones
+    2025-01 : Kickoff
+    2025-02 : Design Review
+    2025-03 : Dev Complete
+    2025-04 : Launch</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="journey">
+        <h2>10. User Journey</h2>
+        <p>journey maps user steps; the number is satisfaction (1–5).</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>journey
+    title Booking Flow
+    section Browse
+      Open site: 5: User
+      Search trips: 3: User
+    section Checkout
+      Select seat: 4: User
+      Pay order: 2: User, System</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gitgraph">
+        <h2>11. Git Graph</h2>
+        <p>gitGraph visualizes branches, commits, and merges.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gitGraph
+    commit id: "init"
+    branch develop
+    checkout develop
+    commit id: "feat-A"
+    checkout main
+    merge develop id: "release-1.0"</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="quadrant">
+        <h2>12. Quadrant Chart</h2>
+        <p>quadrantChart maps items to four quadrants; coordinates [x, y] range 0–1.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>quadrantChart
+    title Priority Matrix
+    x-axis Low Impact --&gt; High Impact
+    y-axis Low Urgency --&gt; High Urgency
+    quadrant-1 Do Now
+    quadrant-2 Schedule
+    quadrant-3 Defer
+    quadrant-4 Monitor
+    Bug fix: [0.8, 0.9]
+    New feature: [0.7, 0.5]</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="block">
+        <h2>13. Block Diagram</h2>
+        <p>block-beta describes modules or data flow with blocks and arrows.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>block-beta
+    columns 3
+    A["Input"] B["Process"] C["Output"]
+    A --&gt; B
+    B --&gt; C</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sankey">
+        <h2>14. Sankey Diagram</h2>
+        <p>Start with sankey, then CSV rows: source,target,value (no leading spaces). Use English node names.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sankey
+
+Visit,Signup,5
+Visit,Leave,20
+Signup,Trial,4
+Trial,Pay,3</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="requirement">
+        <h2>15. Requirement Diagram</h2>
+        <p>requirementDiagram links requirements to system elements.</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>requirementDiagram
+    requirement user_login {
+        id: 1
+        text: Support password login
+        risk: medium
+        verifymethod: test
+    }
+    element auth_module {
+        type: system
+    }
+    auth_module - satisfies -&gt; user_login</code></pre>
+        <p class="guide-preview-label">Preview</p>
+        <div class="guide-preview" role="img" aria-label="Preview"></div>
+      </div>
+      </section>
+<section class="guide-section" id="tips">
+        <h2>16. Tips</h2>
+        <p>Switch themes, hand-drawn style, zoom the preview, and export SVG/PNG in the editor.</p>
+        
+      </section>
+            <p class="guide-cta-wrap">
+              <a class="guide-cta" href="/en/">Try the Editor</a>
+            </p>
+          </div>
+        </article>
+      </main>
+    </div>
+    <script type="module" src="/src/guide.js"></script>
+  </body>
+</html>

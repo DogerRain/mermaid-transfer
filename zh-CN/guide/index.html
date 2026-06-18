@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid 入门教程 - 流程图、时序图、甘特图语法指南</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/guide.css" />
+  </head>
+  <body>
+    <header class="guide-header">
+      <a class="guide-brand" href="/zh-CN/">Mermaid 在线渲染</a>
+      <nav class="guide-nav">
+        <a class="guide-nav-link is-active" href="/zh-CN/guide/">Mermaid 教程</a>
+        <a class="guide-nav-link guide-nav-cta" href="/zh-CN/">打开编辑器</a>
+      </nav>
+    </header>
+    <div class="guide-shell">
+      <aside class="guide-sidebar" id="guide-sidebar">
+        <div class="guide-sidebar-panel">
+          <div class="guide-toc-header">
+            <div class="guide-toc-title">
+              <svg class="guide-toc-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="12" r="1" fill="currentColor"/>
+          </svg>
+              <span class="guide-toc-heading">目录</span>
+            </div>
+            <button type="button" class="guide-toc-toggle" id="guide-toc-toggle" aria-expanded="true" aria-controls="guide-toc-list" data-collapse="收起" data-expand="展开">收起</button>
+          </div>
+          <nav class="guide-toc" aria-label="目录">
+            <ol class="guide-toc-list" id="guide-toc-list">
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#flowchart" data-section="flowchart">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">1、</span>流程图（Flowchart）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sequence" data-section="sequence">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">2、</span>时序图（Sequence Diagram）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gantt" data-section="gantt">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">3、</span>甘特图（Gantt）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#class" data-section="class">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">4、</span>类图（Class Diagram）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#state" data-section="state">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">5、</span>状态图（State Diagram）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#er" data-section="er">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">6、</span>ER 图（Entity Relationship）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#pie" data-section="pie">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">7、</span>饼图（Pie Chart）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#mindmap" data-section="mindmap">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">8、</span>思维导图（Mindmap）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#timeline" data-section="timeline">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">9、</span>时间线（Timeline）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#journey" data-section="journey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">10、</span>用户旅程图（User Journey）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gitgraph" data-section="gitgraph">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">11、</span>Git 分支图（Git Graph）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#quadrant" data-section="quadrant">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">12、</span>象限图（Quadrant Chart）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#block" data-section="block">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">13、</span>块图（Block Diagram）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sankey" data-section="sankey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">14、</span>桑基图（Sankey）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#requirement" data-section="requirement">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">15、</span>需求图（Requirement Diagram）</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#tips" data-section="tips">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">16、</span>实用技巧</span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </aside>
+      <main class="guide-main">
+        <article class="guide-article">
+          <header class="guide-article-header">
+            <h1>Mermaid 入门教程</h1>
+            <p class="guide-lead">Mermaid 是一种用纯文本描述图表的语言（Diagram as Code）。你只需编写简单的语法，即可生成流程图、时序图、甘特图等，并导出 SVG / PNG。本教程覆盖最常用的语法与示例，可直接复制到左侧编辑器中试用。</p>
+          </header>
+          <div class="guide-content">
+            <section class="guide-section" id="flowchart">
+        <h2>1. 流程图（Flowchart）</h2>
+        <p>用 graph 或 flowchart 声明方向：TD（上下）、LR（左右）。节点用方括号 []，判断用花括号 {}。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>graph TD
+    A[开始] --&gt; B{是否通过?}
+    B --&gt;|是| C[执行]
+    B --&gt;|否| D[结束]
+    C --&gt; D</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sequence">
+        <h2>2. 时序图（Sequence Diagram）</h2>
+        <p>描述对象之间的交互顺序，participant 定义参与者，箭头表示消息。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sequenceDiagram
+    participant 用户
+    participant 系统
+    用户-&gt;&gt;系统: 登录请求
+    系统--&gt;&gt;用户: 返回 Token</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gantt">
+        <h2>3. 甘特图（Gantt）</h2>
+        <p>用于项目排期，dateFormat 指定日期格式，section 分组任务。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gantt
+    title 项目计划
+    dateFormat YYYY-MM-DD
+    section 开发
+    需求分析 :a1, 2025-01-01, 7d
+    编码实现 :a2, after a1, 10d</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="class">
+        <h2>4. 类图（Class Diagram）</h2>
+        <p>用 classDiagram 描述类、属性、方法及继承关系。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>classDiagram
+    class Animal {
+        +String name
+        +makeSound()
+    }
+    class Dog {
+        +bark()
+    }
+    Animal &lt;|-- Dog</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="state">
+        <h2>5. 状态图（State Diagram）</h2>
+        <p>用 stateDiagram-v2 描述状态迁移，[*] 表示起始与终止。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>stateDiagram-v2
+    [*] --&gt; 待处理
+    待处理 --&gt; 进行中: 开始
+    进行中 --&gt; 已完成: 完成
+    已完成 --&gt; [*]</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="er">
+        <h2>6. ER 图（Entity Relationship）</h2>
+        <p>用 erDiagram 描述实体及关系，||--o{ 等符号表示基数。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    CUSTOMER {
+        string id
+        string name
+    }</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="pie">
+        <h2>7. 饼图（Pie Chart）</h2>
+        <p>饼图适合展示占比，每项格式为 "标签" : 数值。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>pie title 市场份额
+    "产品 A" : 42
+    "产品 B" : 28
+    "其他" : 30</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="mindmap">
+        <h2>8. 思维导图（Mindmap）</h2>
+        <p>用 mindmap 表达层级结构，缩进表示子节点。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>mindmap
+  root((产品规划))
+    功能
+      用户管理
+    技术
+      前端
+      后端</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="timeline">
+        <h2>9. 时间线（Timeline）</h2>
+        <p>timeline 按时间顺序列出事件，适合里程碑展示。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>timeline
+    title 项目里程碑
+    2025-01 : 立项
+    2025-02 : 设计评审
+    2025-03 : 开发完成
+    2025-04 : 上线发布</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="journey">
+        <h2>10. 用户旅程图（User Journey）</h2>
+        <p>journey 描述用户体验步骤，数字表示满意度（1–5）。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>journey
+    title 用户购票旅程
+    section 浏览
+      打开网站: 5: 用户
+      搜索车次: 3: 用户
+    section 下单
+      选择座位: 4: 用户
+      支付订单: 2: 用户, 系统</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gitgraph">
+        <h2>11. Git 分支图（Git Graph）</h2>
+        <p>gitGraph 可视化分支、提交与合并历史。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gitGraph
+    commit id: "init"
+    branch develop
+    checkout develop
+    commit id: "feat-A"
+    checkout main
+    merge develop id: "release-1.0"</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="quadrant">
+        <h2>12. 象限图（Quadrant Chart）</h2>
+        <p>quadrantChart 将事项映射到四象限，坐标 [x, y] 范围 0–1。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>quadrantChart
+    title 需求优先级矩阵
+    x-axis 低影响 --&gt; 高影响
+    y-axis 低紧急 --&gt; 高紧急
+    quadrant-1 立即处理
+    quadrant-2 计划安排
+    quadrant-3 可延后
+    quadrant-4 观察评估
+    缺陷修复: [0.8, 0.9]
+    新功能: [0.7, 0.5]</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="block">
+        <h2>13. 块图（Block Diagram）</h2>
+        <p>block-beta 用块与箭头描述系统模块或数据流。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>block-beta
+    columns 3
+    A["输入"] B["处理"] C["输出"]
+    A --&gt; B
+    B --&gt; C</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sankey">
+        <h2>14. 桑基图（Sankey）</h2>
+        <p>桑基图展示流量分配。以 sankey 开头，下一行起每行写：来源,目标,数值（CSV，行首勿缩进）。节点名建议使用英文或拼音；当前 Mermaid 版本对中文节点名支持不完善。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sankey
+
+Visit,Signup,5
+Visit,Leave,20
+Signup,Trial,4
+Trial,Pay,3</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="requirement">
+        <h2>15. 需求图（Requirement Diagram）</h2>
+        <p>requirementDiagram 描述需求、系统元素及满足关系。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>requirementDiagram
+    requirement user_login {
+        id: 1
+        text: "支持账号密码登录"
+        risk: medium
+        verifymethod: test
+    }
+    element auth_module {
+        type: system
+    }
+    auth_module - satisfies -&gt; user_login</code></pre>
+        <p class="guide-preview-label">预览</p>
+        <div class="guide-preview" role="img" aria-label="预览"></div>
+      </div>
+      </section>
+<section class="guide-section" id="tips">
+        <h2>16. 实用技巧</h2>
+        <p>在本站编辑器中可切换主题、开启手绘风格、滚轮缩放预览，并导出 SVG / PNG。建议先用模板下拉快速加载示例，再逐步修改。</p>
+        
+      </section>
+            <p class="guide-cta-wrap">
+              <a class="guide-cta" href="/zh-CN/">立即打开编辑器体验</a>
+            </p>
+          </div>
+        </article>
+      </main>
+    </div>
+    <script type="module" src="/src/guide.js"></script>
+  </body>
+</html>

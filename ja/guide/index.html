@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid チュートリアル - フローチャート・シーケンス図・ガントチャート</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/guide.css" />
+  </head>
+  <body>
+    <header class="guide-header">
+      <a class="guide-brand" href="/ja/">Mermaid オンライン</a>
+      <nav class="guide-nav">
+        <a class="guide-nav-link is-active" href="/ja/guide/">Mermaid チュートリアル</a>
+        <a class="guide-nav-link guide-nav-cta" href="/ja/">エディタを開く</a>
+      </nav>
+    </header>
+    <div class="guide-shell">
+      <aside class="guide-sidebar" id="guide-sidebar">
+        <div class="guide-sidebar-panel">
+          <div class="guide-toc-header">
+            <div class="guide-toc-title">
+              <svg class="guide-toc-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="13" cy="12" r="1" fill="currentColor"/>
+          </svg>
+              <span class="guide-toc-heading">目次</span>
+            </div>
+            <button type="button" class="guide-toc-toggle" id="guide-toc-toggle" aria-expanded="true" aria-controls="guide-toc-list" data-collapse="閉じる" data-expand="開く">閉じる</button>
+          </div>
+          <nav class="guide-toc" aria-label="目次">
+            <ol class="guide-toc-list" id="guide-toc-list">
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#flowchart" data-section="flowchart">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">1.</span>フローチャート</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sequence" data-section="sequence">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">2.</span>シーケンス図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gantt" data-section="gantt">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">3.</span>ガントチャート</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#class" data-section="class">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">4.</span>クラス図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#state" data-section="state">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">5.</span>状態図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#er" data-section="er">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">6.</span>ER 図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#pie" data-section="pie">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">7.</span>円グラフ</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#mindmap" data-section="mindmap">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">8.</span>マインドマップ</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#timeline" data-section="timeline">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">9.</span>タイムライン</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#journey" data-section="journey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">10.</span>ユーザージャーニー</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#gitgraph" data-section="gitgraph">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">11.</span>Git グラフ</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#quadrant" data-section="quadrant">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">12.</span>クアドラントチャート</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#block" data-section="block">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">13.</span>ブロック図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#sankey" data-section="sankey">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">14.</span>サンキーダイアグラム</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#requirement" data-section="requirement">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">15.</span>要件図</span>
+                </a>
+              </li>
+              <li class="guide-toc-item">
+                <a class="guide-toc-link" href="#tips" data-section="tips">
+                  <span class="guide-toc-marker" aria-hidden="true"><span class="guide-toc-dot"></span></span>
+                  <span class="guide-toc-label"><span class="guide-toc-num">16.</span>ヒント</span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </aside>
+      <main class="guide-main">
+        <article class="guide-article">
+          <header class="guide-article-header">
+            <h1>Mermaid チュートリアル</h1>
+            <p class="guide-lead">Mermaid はテキストで図を記述する言語です。フローチャート、シーケンス図、ガントチャートなどの基本構文と例を紹介します。</p>
+          </header>
+          <div class="guide-content">
+            <section class="guide-section" id="flowchart">
+        <h2>1. フローチャート</h2>
+        <p>graph / flowchart と TD（縦）または LR（横）を使います。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>graph TD
+    A[開始] --&gt; B{判定}
+    B --&gt;|はい| C[実行]
+    B --&gt;|いいえ| D[終了]</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sequence">
+        <h2>2. シーケンス図</h2>
+        <p>participant で参加者を定義し、矢印でメッセージを表します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sequenceDiagram
+    participant ユーザー
+    participant API
+    ユーザー-&gt;&gt;API: リクエスト
+    API--&gt;&gt;ユーザー: レスポンス</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gantt">
+        <h2>3. ガントチャート</h2>
+        <p>dateFormat と section でスケジュールを記述します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gantt
+    title 計画
+    dateFormat YYYY-MM-DD
+    section 開発
+    分析 :a1, 2025-01-01, 7d
+    実装 :a2, after a1, 10d</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="class">
+        <h2>4. クラス図</h2>
+        <p>classDiagram でクラス・属性・継承を表現します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>classDiagram
+    class Animal {
+        +String name
+        +makeSound()
+    }
+    class Dog {
+        +bark()
+    }
+    Animal &lt;|-- Dog</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="state">
+        <h2>5. 状態図</h2>
+        <p>stateDiagram-v2 で状態遷移を記述します。[*] は開始・終了です。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>stateDiagram-v2
+    [*] --&gt; 待機
+    待機 --&gt; 実行中: 開始
+    実行中 --&gt; 完了: 終了
+    完了 --&gt; [*]</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="er">
+        <h2>6. ER 図</h2>
+        <p>erDiagram でエンティティとリレーションを定義します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    CUSTOMER {
+        string id
+        string name
+    }</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="pie">
+        <h2>7. 円グラフ</h2>
+        <p>pie で構成比を表現します。"ラベル" : 数値 の形式です。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>pie title シェア
+    "A" : 40
+    "B" : 35
+    "C" : 25</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="mindmap">
+        <h2>8. マインドマップ</h2>
+        <p>mindmap で階層構造を表現します。インデントで子ノードを示します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>mindmap
+  root((製品))
+    機能
+      認証
+    技術
+      フロント
+      バック</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="timeline">
+        <h2>9. タイムライン</h2>
+        <p>timeline で時系列のイベントやマイルストーンを列挙します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>timeline
+    title マイルストーン
+    2025-01 : キックオフ
+    2025-02 : 設計レビュー
+    2025-03 : 開発完了
+    2025-04 : リリース</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="journey">
+        <h2>10. ユーザージャーニー</h2>
+        <p>journey でユーザー体験を記述します。数値は満足度（1–5）です。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>journey
+    title 予約フロー
+    section 閲覧
+      サイトを開く: 5: ユーザー
+      検索する: 3: ユーザー
+    section 購入
+      座席選択: 4: ユーザー
+      支払い: 2: ユーザー, システム</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="gitgraph">
+        <h2>11. Git グラフ</h2>
+        <p>gitGraph でブランチ・コミット・マージを可視化します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>gitGraph
+    commit id: "init"
+    branch develop
+    checkout develop
+    commit id: "feat-A"
+    checkout main
+    merge develop id: "release-1.0"</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="quadrant">
+        <h2>12. クアドラントチャート</h2>
+        <p>quadrantChart で四象限に項目を配置します。座標 [x, y] は 0–1 です。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>quadrantChart
+    title 優先度マトリクス
+    x-axis 低影響 --&gt; 高影響
+    y-axis 低緊急 --&gt; 高緊急
+    quadrant-1 即対応
+    quadrant-2 計画
+    quadrant-3 延期
+    quadrant-4 監視
+    バグ修正: [0.8, 0.9]
+    新機能: [0.7, 0.5]</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="block">
+        <h2>13. ブロック図</h2>
+        <p>block-beta でモジュールやデータフローを表現します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>block-beta
+    columns 3
+    A["入力"] B["処理"] C["出力"]
+    A --&gt; B
+    B --&gt; C</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="sankey">
+        <h2>14. サンキーダイアグラム</h2>
+        <p>sankey の後に CSV（source,target,value）で記述。ノード名は英字推奨（日本語・中国語は一部バージョンで未対応）。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>sankey
+
+Visit,Signup,5
+Visit,Leave,20
+Signup,Trial,4
+Trial,Pay,3</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="requirement">
+        <h2>15. 要件図</h2>
+        <p>requirementDiagram で要件とシステム要素の関係を記述します。</p>
+        <div class="guide-demo">
+        <pre class="guide-code"><code>requirementDiagram
+    requirement user_login {
+        id: 1
+        text: "パスワード認証をサポート"
+        risk: medium
+        verifymethod: test
+    }
+    element auth_module {
+        type: system
+    }
+    auth_module - satisfies -&gt; user_login</code></pre>
+        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview" role="img" aria-label="プレビュー"></div>
+      </div>
+      </section>
+<section class="guide-section" id="tips">
+        <h2>16. ヒント</h2>
+        <p>エディタでテーマ切替、手描きスタイル、ズーム、SVG/PNG エクスポートが利用できます。</p>
+        
+      </section>
+            <p class="guide-cta-wrap">
+              <a class="guide-cta" href="/ja/">エディタで試す</a>
+            </p>
+          </div>
+        </article>
+      </main>
+    </div>
+    <script type="module" src="/src/guide.js"></script>
+  </body>
+</html>

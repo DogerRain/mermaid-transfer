@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja" data-default-lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid オンラインエディタ - フローチャート・シーケンス図・ガントチャート</title>
+    <meta name="description" content="無料の Mermaid オンラインエディタ。フローチャート、シーケンス図、ガントチャート、クラス図、ER 図、マインドマップなどをリアルタイムプレビュー。SVG/PNG エクスポート、テーマ、手描きスタイル対応。" />
+    <meta name="keywords" content="Mermaid,Mermaid エディタ,フローチャート,シーケンス図,ガントチャート,UML,ダイアグラム,SVG エクスポート,PNG エクスポート,オンライン" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+    <meta name="author" content="Mermaid オンライン" />
+    <link rel="canonical" href="https://your-domain.com/ja/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
+    <link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
+    <link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
+    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="Mermaid オンライン - リアルタイム図表エディタ" />
+    <meta property="og:description" content="Mermaid コードを書いて即座にプレビュー。SVG/PNG エクスポート。フローチャート、シーケンス図、ガントチャートなどに対応。" />
+    <meta property="og:image" content="https://your-domain.com/icon.svg" />
+    <meta property="og:url" content="https://your-domain.com/ja/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Mermaid オンライン - リアルタイム図表エディタ" />
+    <meta name="twitter:description" content="Mermaid コードを書いて即座にプレビュー。SVG/PNG エクスポート。フローチャート、シーケンス図、ガントチャートなどに対応。" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mermaid オンライン",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "ja",
+        "description": "無料の Mermaid オンラインエディタ。リアルタイムプレビューと SVG/PNG エクスポートに対応。",
+        "keywords": "Mermaid, フローチャート, シーケンス図, ガントチャート, オンラインエディタ",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <defs>
+            <linearGradient id="brand-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="url(#brand-bg)"/>
+          <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="12" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M19 24v4h13v4"/>
+            <rect x="24" y="32" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M33 44v4h13"/>
+            <polygon points="46,48 52,45 46,42" fill="#fff" stroke="none"/>
+            <rect x="36" y="12" width="18" height="12" rx="6" fill="#fffbeb" stroke="#fef3c7"/>
+          </g>
+        </svg>
+        <span class="brand-title" data-i18n="brand">Mermaid オンライン</span>
+      </div>
+      <a class="header-guide-link" href="/ja/guide/">Mermaid チュートリアル</a>
+      <div class="header-actions">
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button type="button" class="lang-toggle" id="lang-toggle" title="Language">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="lang-label"></span>
+          </button>
+          <div class="lang-menu" id="lang-menu">
+            <a class="lang-option" data-lang="zh" href="/zh-CN/">中文</a>
+            <a class="lang-option" data-lang="en" href="/en/">English</a>
+            <a class="lang-option" data-lang="ja" href="/ja/">日本語</a>
+          </div>
+        </div>
+        <a class="header-blog-link" href="https://learnjava.baimuxym.cn/" target="_blank" rel="noopener noreferrer" title="HelloCoder Blog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="editor-panel">
+        <div class="panel-toolbar">
+          <label class="field-label" for="theme-select" data-i18n="themeLabel">Theme</label>
+          <select id="theme-select" class="select">
+            <option value="default" data-i18n="themeDefault">Default</option>
+            <option value="neutral" data-i18n="themeNeutral">Neutral</option>
+            <option value="dark" data-i18n="themeDark">Dark</option>
+            <option value="forest" data-i18n="themeForest">Forest</option>
+            <option value="base" data-i18n="themeBase">Base</option>
+          </select>
+          <label class="field-label" for="template-select" data-i18n="templateLabel">Templates</label>
+          <select id="template-select" class="select">
+            <option value="" data-i18n="templatePlaceholder">Select…</option>
+            <option value="flowchart" data-i18n="tplFlowchart">Flowchart</option>
+            <option value="flowchartLR" data-i18n="tplFlowchartLR">Flowchart LR</option>
+            <option value="sequence" data-i18n="tplSequence">Sequence</option>
+            <option value="gantt" data-i18n="tplGantt">Gantt</option>
+            <option value="class" data-i18n="tplClass">Class</option>
+            <option value="state" data-i18n="tplState">State</option>
+            <option value="er" data-i18n="tplEr">ER</option>
+            <option value="pie" data-i18n="tplPie">Pie</option>
+            <option value="mindmap" data-i18n="tplMindmap">Mindmap</option>
+            <option value="timeline" data-i18n="tplTimeline">Timeline</option>
+            <option value="journey" data-i18n="tplJourney">Journey</option>
+            <option value="gitGraph" data-i18n="tplGitGraph">Git Graph</option>
+            <option value="quadrant" data-i18n="tplQuadrant">Quadrant</option>
+            <option value="requirement" data-i18n="tplRequirement">Requirement</option>
+            <option value="sankey" data-i18n="tplSankey">Sankey</option>
+            <option value="block" data-i18n="tplBlock">Block</option>
+          </select>
+        </div>
+        <div class="editor-wrap">
+          <textarea id="editor" class="editor" spellcheck="false" aria-label="Mermaid source"></textarea>
+        </div>
+        <div class="editor-status">
+          <span id="status-text" data-i18n="statusReady">Ready</span>
+        </div>
+      </aside>
+
+      <div class="resizer" id="resizer" title="Resize" aria-hidden="true"></div>
+
+      <section class="preview-panel">
+        <div class="preview-toolbar">
+          <div class="zoom-controls">
+            <button type="button" class="btn btn-icon" id="zoom-out" data-i18n-title="zoomOut" title="Zoom out">−</button>
+            <span class="zoom-label" id="zoom-label">100%</span>
+            <button type="button" class="btn btn-icon" id="zoom-in" data-i18n-title="zoomIn" title="Zoom in">+</button>
+            <button type="button" class="btn" id="zoom-reset" data-i18n-title="zoomFit" data-i18n="zoomFit" title="Fit">Fit</button>
+            <button type="button" class="btn" id="zoom-100" title="1:1">1:1</button>
+          </div>
+          <div class="export-controls">
+            <button type="button" class="btn btn-primary" id="export-svg" data-i18n="exportSvg">Export SVG</button>
+            <button type="button" class="btn btn-primary" id="export-png" data-i18n="exportPng">Export PNG</button>
+          </div>
+        </div>
+        <div class="preview-viewport" id="preview-viewport">
+          <div class="preview-stage" id="preview-stage">
+            <div id="mermaid-output" class="mermaid-output"></div>
+          </div>
+          <div id="error-banner" class="error-banner hidden" role="alert"></div>
+          <div class="preview-switches" aria-label="Preview switches">
+            <button type="button" class="switch-btn" id="toggle-handdrawn" data-i18n-title="toggleHandDrawn" title="Hand-drawn">✎</button>
+            <button type="button" class="switch-btn is-active" id="toggle-grid" data-i18n-title="toggleGrid" title="Grid">#</button>
+          </div>
+          <p class="preview-hint" data-i18n="previewHint">Scroll to zoom</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="seo-footer">
+      <details>
+        <summary>このツールについて</summary>
+        <div class="seo-body">
+          <h1>Mermaid オンラインエディタ</h1>
+          <p>無料のブラウザ版 Mermaid エディタ。左でコードを書き、右でリアルタイムプレビュー。フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなどに対応。テーマ切替、手描きスタイル、ズーム/パン、SVG/PNG エクスポート。レンダリングはブラウザ内で完結します。</p>
+          <p>対応図表：フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、円グラフ、マインドマップ、タイムライン、ユーザージャーニー、Git 図、クアドラント、要件図、サンキー、ブロック図。</p>
+          <h2>よくある質問</h2>
+          <dl>
+            <dt>どのような図に対応していますか？</dt>
+            <dd>フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなど、主要な Mermaid 構文に対応しています。</dd>
+            <dt>PNG や SVG へのエクスポート方法は？</dt>
+            <dd>プレビュー欄の「SVG エクスポート」「PNG エクスポート」ボタンから、現在の図をダウンロードできます。</dd>
+            <dt>データはサーバーに送信されますか？</dt>
+            <dd>いいえ。図はブラウザ内でレンダリングされ、コードはサーバーに送信されません。</dd>
+          </dl>
+        </div>
+      </details>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
