@@ -1,5 +1,5 @@
 import mermaid from 'mermaid';
-import { t, getLang, setLang, initI18n } from './i18n.js';
+import { t, getLang, initI18n } from './i18n.js';
 
 const DEFAULT_SOURCE = `graph TD
     A[开始] --> B{判断}
@@ -110,23 +110,17 @@ const TEMPLATES = {
     新功能: [0.7, 0.5]
     文档整理: [0.3, 0.2]`,
   requirement: `requirementDiagram
-    requirement 用户登录 {
-      id: 1
-      text: 支持账号密码登录
-      risk: medium
-      verifymethod: test
+    requirement user_login {
+        id: 1
+        text: "支持账号密码登录"
+        risk: medium
+        verifymethod: test
     }
-    element 认证模块 {
-      type: system
+    element auth_module {
+        type: system
     }
-    用户登录 - satisfies -> 认证模块`,
-  sankey: `sankey-beta
-    访问,注册,5
-    访问,离开,20
-    注册,试用,4
-    注册,流失,1
-    试用,付费,3
-    试用,流失,1`,
+    auth_module - satisfies -> user_login`,
+  sankey: 'sankey\n\nVisit,Signup,5\nVisit,Leave,20\nSignup,Trial,4\nSignup,Churn,1\nTrial,Pay,3\nTrial,Churn,1',
   block: `block-beta
     columns 3
     A["输入"] B["处理"] C["输出"]
@@ -261,7 +255,7 @@ function zoomAt(factor, clientX, clientY) {
 }
 
 async function renderDiagram() {
-  const source = editor.value.trim();
+  const source = editor.value.trim().replace(/\r\n?/g, '\n');
   const id = ++renderId;
 
   if (!source) {
@@ -814,12 +808,9 @@ document.getElementById('lang-toggle').addEventListener('click', (e) => {
   e.stopPropagation();
   langDropdown.classList.toggle('open');
 });
-langMenu.querySelectorAll('.lang-option').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const lang = btn.dataset.lang;
-    setLang(lang);
+langMenu.querySelectorAll('.lang-option').forEach((link) => {
+  link.addEventListener('click', () => {
     langDropdown.classList.remove('open');
-    renderDiagram();
   });
 });
 document.addEventListener('click', () => langDropdown.classList.remove('open'));

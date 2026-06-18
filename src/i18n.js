@@ -146,11 +146,27 @@ const translations = {
 };
 
 const LANG_KEYS = ['zh', 'en', 'ja'];
+const LANG_PATHS = { zh: '/zh-CN/', en: '/en/', ja: '/ja/' };
+
 let currentLang = 'zh';
 
+function getLangFromPath() {
+  const path = window.location.pathname;
+  if (path.startsWith('/en')) return 'en';
+  if (path.startsWith('/ja')) return 'ja';
+  if (path.startsWith('/zh-CN')) return 'zh';
+  const fromHtml = document.documentElement.getAttribute('data-default-lang');
+  if (fromHtml && LANG_KEYS.includes(fromHtml)) return fromHtml;
+  return null;
+}
+
 function detectLang() {
+  const fromPath = getLangFromPath();
+  if (fromPath) return fromPath;
+
   const saved = localStorage.getItem('mermaid-lang');
   if (saved && LANG_KEYS.includes(saved)) return saved;
+
   const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
   if (browserLang.startsWith('ja')) return 'ja';
   if (browserLang.startsWith('en')) return 'en';
@@ -161,10 +177,19 @@ export function getLang() {
   return currentLang;
 }
 
+export function getLangPath(lang = currentLang) {
+  return LANG_PATHS[lang] || LANG_PATHS.zh;
+}
+
 export function setLang(lang) {
   if (!LANG_KEYS.includes(lang)) return;
-  currentLang = lang;
   localStorage.setItem('mermaid-lang', lang);
+  const target = LANG_PATHS[lang];
+  if (target && !window.location.pathname.startsWith(target.replace(/\/$/, ''))) {
+    window.location.href = target;
+    return;
+  }
+  currentLang = lang;
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
   applyTranslations();
   updateLangUI();
@@ -179,15 +204,15 @@ export function t(key, vars) {
 const langLabels = { zh: '中', en: 'EN', ja: '日' };
 
 export function applyTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
     el.textContent = t(key);
   });
-  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
     const key = el.getAttribute('data-i18n-title');
     el.title = t(key);
   });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
     const key = el.getAttribute('data-i18n-placeholder');
     el.placeholder = t(key);
   });
@@ -195,6 +220,7 @@ export function applyTranslations() {
 
 export function initI18n() {
   currentLang = detectLang();
+  localStorage.setItem('mermaid-lang', currentLang);
   document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : currentLang;
   applyTranslations();
   updateLangUI();
@@ -203,7 +229,7 @@ export function initI18n() {
 function updateLangUI() {
   const label = document.getElementById('lang-label');
   if (label) label.textContent = langLabels[currentLang];
-  document.querySelectorAll('.lang-option').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  document.querySelectorAll('.lang-option').forEach((el) => {
+    el.classList.toggle('active', el.dataset.lang === currentLang);
   });
 }

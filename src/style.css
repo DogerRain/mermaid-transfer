@@ -36,6 +36,11 @@ body {
   color: var(--text);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -64,6 +69,25 @@ body {
 .brand-title {
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+.header-guide-link {
+  margin-left: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.header-guide-link:hover {
+  color: var(--accent);
+  background: rgba(88, 166, 255, 0.1);
+  border-color: var(--accent);
 }
 
 .header-blog-link {
@@ -156,6 +180,7 @@ body {
   background: none;
   border: none;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition: background 0.12s;
 }
@@ -172,7 +197,8 @@ body {
 
 .workspace {
   display: flex;
-  height: calc(100vh - 48px);
+  flex: 1;
+  min-height: 0;
 }
 
 .editor-panel {
@@ -450,6 +476,60 @@ body {
   background: #ddf4ff;
   border-color: #54aeff;
   color: #0969da;
+}
+
+.seo-footer {
+  flex-shrink: 0;
+  background: var(--bg-header);
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.seo-footer details {
+  padding: 0.35rem 1rem;
+}
+
+.seo-footer summary {
+  cursor: pointer;
+  user-select: none;
+}
+
+.seo-body {
+  margin-top: 0.5rem;
+  max-height: 140px;
+  overflow-y: auto;
+  line-height: 1.55;
+}
+
+.seo-body h1 {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.seo-body h2 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.seo-body p {
+  margin: 0 0 0.35rem;
+}
+
+.seo-body dl {
+  margin: 0;
+}
+
+.seo-body dt {
+  margin-top: 0.35rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.seo-body dd {
+  margin: 0.15rem 0 0;
 }
 
 @media (max-width: 768px) {

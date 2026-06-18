@@ -2,13 +2,24 @@
 
 左右分栏的 Mermaid 实时预览编辑器：左侧编写代码，右侧即时渲染，支持主题切换、缩放平移、导出 PNG / SVG。
 
+在线预览：[https://mermaid.baimuxym.cn](https://mermaid.baimuxym.cn/)
+
 ## SEO 与收录
 
-部署到正式域名后，请编辑 `public/seo.txt` 与 `public/sitemap.xml` 中的站点地址，并提交至搜索引擎：
+多语言入口（利于搜索引擎区分语言版本）：
+
+- `/zh-CN/` — 中文
+- `/en/` — English
+- `/ja/` — 日本語
+- `/` — 按浏览器语言自动跳转
+
+每个语言页面包含独立的 `title` / `description` / `keywords`、`hreflang` 互链、以及可抓取的简介与 FAQ（页脚展开）。
+
+部署到正式域名后，请编辑 `scripts/gen-lang-pages.mjs` 中的 `SITE` 常量并重新 `npm run build`，再提交至搜索引擎：
 
 - `robots.txt` — 允许爬虫抓取
-- `sitemap.xml` — 站点地图
-- `seo.txt` — 收录说明与 Mermaid 相关关键词列表
+- `sitemap.xml` — 多语言站点地图（含 hreflang）
+- `seo.txt` — 各语言 URL 列表（运营参考，不直接提升排名）
 
 ## 功能
 
@@ -43,7 +54,7 @@ npm run build
 npm run preview
 ```
 
-浏览器访问：**http://localhost:5173/**（以终端打印地址为准）。
+浏览器访问：**http://localhost:5176/zh-CN/**（以终端打印地址为准）。
 
 生产构建：
 

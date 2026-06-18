@@ -1,41 +1,13 @@
-# Mermaid 在线渲染 — 搜索引擎收录说明
-# 部署后请将下方「站点地址」替换为你的正式域名（含 https://）
+# Mermaid Editor - SEO / Sitemap URLs
+# Replace https://your-domain.com with your production domain before submitting to search engines.
 
-站点名称: Mermaid 在线渲染
-站点地址: https://your-domain.com/
-语言: zh-CN
-内容类型: Mermaid 图表在线编辑器，实时预览，支持导出 SVG / PNG
+https://your-domain.com/zh-CN/
+https://your-domain.com/en/
+https://your-domain.com/ja/
 
-# 主要页面（提交收录时可使用）
-https://your-domain.com/
+https://your-domain.com/zh-CN/guide/
+https://your-domain.com/en/guide/
+https://your-domain.com/ja/guide/
+
 https://your-domain.com/robots.txt
 https://your-domain.com/sitemap.xml
-
-# SEO 关键词（Mermaid 相关）
-Mermaid
-Mermaid 在线
-Mermaid 编辑器
-Mermaid 在线渲染
-Mermaid Live Editor
-Mermaid 流程图
-Mermaid 时序图
-Mermaid 甘特图
-Mermaid 类图
-Mermaid 状态图
-Mermaid ER 图
-Mermaid 思维导图
-Mermaid 导出 PNG
-Mermaid 导出 SVG
-Mermaid 实时预览
-Mermaid 手绘风格
-流程图在线制作
-时序图在线
-甘特图在线
-UML 图在线
-图表代码编辑器
-文本转流程图
-Markdown 图表
-diagram as code
-
-# 网站简介（用于搜索摘要）
-免费在线 Mermaid 图表编辑器：左侧编写 Mermaid 代码，右侧实时预览流程图、时序图、甘特图、类图、状态图、ER 图、饼图、思维导图等，支持主题切换、缩放平移、手绘风格、导出 SVG 与 PNG。
