@@ -354,6 +354,17 @@ body {
   border-color: #0550ae;
 }
 
+.btn-copy-image {
+  color: #fff;
+  background: #0d9488;
+  border-color: #0d9488;
+}
+
+.btn-copy-image:hover {
+  background: #0f766e;
+  border-color: #0f766e;
+}
+
 .zoom-label {
   min-width: 44px;
   text-align: center;
@@ -478,58 +489,35 @@ body {
   color: #0969da;
 }
 
-.seo-footer {
-  flex-shrink: 0;
-  background: var(--bg-header);
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 1000;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  background: #6e7681;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.seo-footer details {
-  padding: 0.35rem 1rem;
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.seo-footer summary {
-  cursor: pointer;
-  user-select: none;
-}
-
-.seo-body {
-  margin-top: 0.5rem;
-  max-height: 140px;
-  overflow-y: auto;
-  line-height: 1.55;
-}
-
-.seo-body h1 {
-  margin: 0 0 0.35rem;
-  font-size: 0.9rem;
-  color: var(--text);
-}
-
-.seo-body h2 {
-  margin: 0.75rem 0 0.35rem;
-  font-size: 0.82rem;
-  color: var(--text);
-}
-
-.seo-body p {
-  margin: 0 0 0.35rem;
-}
-
-.seo-body dl {
-  margin: 0;
-}
-
-.seo-body dt {
-  margin-top: 0.35rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.seo-body dd {
-  margin: 0.15rem 0 0;
+.toast.is-hiding {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-6px);
 }
 
 @media (max-width: 768px) {

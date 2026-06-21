@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
-const SITE = 'https://your-domain.com';
+const SITE = 'https://mermaid.baimuxym.cn';
 
 const LANGS = {
   'zh-CN': {
@@ -23,19 +23,6 @@ const LANGS = {
     jsonDesc: '免费在线 Mermaid 图表编辑器，支持实时预览与导出 SVG、PNG。',
     jsonKeywords: 'Mermaid, 流程图, 时序图, 甘特图, 在线编辑器',
     currency: 'CNY',
-    seoH1: 'Mermaid 在线渲染编辑器',
-    seoIntro:
-      '免费在线 Mermaid 图表工具：左侧编写代码，右侧实时预览流程图（flowchart）、时序图（sequence diagram）、甘特图（gantt chart）、类图、状态图、ER 图、思维导图等。支持多主题、手绘风格、缩放平移，以及导出 SVG / PNG。所有渲染在浏览器本地完成，无需上传数据。',
-    seoTypes:
-      '支持图表：流程图、时序图、甘特图、类图、状态图、ER 图、饼图、思维导图、时间线、用户旅程、Git 图、象限图、需求图、桑基图、块图。',
-    seoAbout: '关于本工具 · SEO',
-    seoFaqTitle: '常见问题',
-    seoFaq1Q: 'Mermaid 支持哪些图表？',
-    seoFaq1A: '支持流程图、时序图、甘特图、类图、状态图、ER 图、饼图、思维导图等常见 Mermaid 语法。',
-    seoFaq2Q: '如何导出 PNG 或 SVG？',
-    seoFaq2A: '点击预览区工具栏的「导出 SVG」或「导出 PNG」，即可下载当前渲染结果。',
-    seoFaq3Q: '数据会上传到服务器吗？',
-    seoFaq3A: '不会。图表在浏览器本地渲染，代码不会发送到服务器。',
     navGuide: 'Mermaid 教程',
     guidePath: '/zh-CN/guide/',
   },
@@ -54,19 +41,6 @@ const LANGS = {
     jsonDesc: 'Free online Mermaid diagram editor with live preview and SVG/PNG export.',
     jsonKeywords: 'Mermaid, flowchart, sequence diagram, gantt chart, online editor',
     currency: 'USD',
-    seoH1: 'Mermaid Live Editor',
-    seoIntro:
-      'A free browser-based Mermaid editor: write code on the left, preview on the right. Supports flowcharts, sequence diagrams, gantt charts, class/state/ER diagrams, mind maps, and more. Switch themes, hand-drawn style, zoom/pan, and export SVG or PNG. Rendering runs locally in your browser.',
-    seoTypes:
-      'Supported: flowchart, sequence diagram, gantt chart, class diagram, state diagram, ER diagram, pie chart, mind map, timeline, user journey, git graph, quadrant chart, requirement diagram, sankey, block diagram.',
-    seoAbout: 'About this tool',
-    seoFaqTitle: 'FAQ',
-    seoFaq1Q: 'What diagram types are supported?',
-    seoFaq1A: 'Flowchart, sequence, gantt, class, state, ER, pie, mindmap, timeline, journey, git graph, quadrant, requirement, sankey, and block diagrams.',
-    seoFaq2Q: 'How do I export PNG or SVG?',
-    seoFaq2A: 'Use the Export SVG or Export PNG buttons in the preview toolbar to download the current diagram.',
-    seoFaq3Q: 'Is my data uploaded?',
-    seoFaq3A: 'No. Diagrams are rendered locally in your browser; your code is not sent to a server.',
     navGuide: 'Mermaid Guide',
     guidePath: '/en/guide/',
   },
@@ -85,19 +59,6 @@ const LANGS = {
     jsonDesc: '無料の Mermaid オンラインエディタ。リアルタイムプレビューと SVG/PNG エクスポートに対応。',
     jsonKeywords: 'Mermaid, フローチャート, シーケンス図, ガントチャート, オンラインエディタ',
     currency: 'JPY',
-    seoH1: 'Mermaid オンラインエディタ',
-    seoIntro:
-      '無料のブラウザ版 Mermaid エディタ。左でコードを書き、右でリアルタイムプレビュー。フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなどに対応。テーマ切替、手描きスタイル、ズーム/パン、SVG/PNG エクスポート。レンダリングはブラウザ内で完結します。',
-    seoTypes:
-      '対応図表：フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、円グラフ、マインドマップ、タイムライン、ユーザージャーニー、Git 図、クアドラント、要件図、サンキー、ブロック図。',
-    seoAbout: 'このツールについて',
-    seoFaqTitle: 'よくある質問',
-    seoFaq1Q: 'どのような図に対応していますか？',
-    seoFaq1A: 'フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなど、主要な Mermaid 構文に対応しています。',
-    seoFaq2Q: 'PNG や SVG へのエクスポート方法は？',
-    seoFaq2A: 'プレビュー欄の「SVG エクスポート」「PNG エクスポート」ボタンから、現在の図をダウンロードできます。',
-    seoFaq3Q: 'データはサーバーに送信されますか？',
-    seoFaq3A: 'いいえ。図はブラウザ内でレンダリングされ、コードはサーバーに送信されません。',
     navGuide: 'Mermaid チュートリアル',
     guidePath: '/ja/guide/',
   },
@@ -260,6 +221,7 @@ function body(cfg) {
             <button type="button" class="btn" id="zoom-100" title="1:1">1:1</button>
           </div>
           <div class="export-controls">
+            <button type="button" class="btn btn-copy-image" id="copy-image" data-i18n="copyImage" data-i18n-title="copyImageTitle" title="Copy as Image">Copy as Image</button>
             <button type="button" class="btn btn-primary" id="export-svg" data-i18n="exportSvg">Export SVG</button>
             <button type="button" class="btn btn-primary" id="export-png" data-i18n="exportPng">Export PNG</button>
           </div>
@@ -277,26 +239,6 @@ function body(cfg) {
         </div>
       </section>
     </main>
-
-    <footer class="seo-footer">
-      <details>
-        <summary>${cfg.seoAbout}</summary>
-        <div class="seo-body">
-          <h1>${cfg.seoH1}</h1>
-          <p>${cfg.seoIntro}</p>
-          <p>${cfg.seoTypes}</p>
-          <h2>${cfg.seoFaqTitle}</h2>
-          <dl>
-            <dt>${cfg.seoFaq1Q}</dt>
-            <dd>${cfg.seoFaq1A}</dd>
-            <dt>${cfg.seoFaq2Q}</dt>
-            <dd>${cfg.seoFaq2A}</dd>
-            <dt>${cfg.seoFaq3Q}</dt>
-            <dd>${cfg.seoFaq3A}</dd>
-          </dl>
-        </div>
-      </details>
-    </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>

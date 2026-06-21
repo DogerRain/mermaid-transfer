@@ -2,44 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://your-domain.com/zh-CN/</loc>
+    <loc>https://mermaid.baimuxym.cn/zh-CN/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mermaid.baimuxym.cn/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mermaid.baimuxym.cn/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mermaid.baimuxym.cn/ja/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mermaid.baimuxym.cn/zh-CN/" />
   </url>
   <url>
-    <loc>https://your-domain.com/en/</loc>
+    <loc>https://mermaid.baimuxym.cn/en/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mermaid.baimuxym.cn/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mermaid.baimuxym.cn/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mermaid.baimuxym.cn/ja/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mermaid.baimuxym.cn/zh-CN/" />
   </url>
   <url>
-    <loc>https://your-domain.com/ja/</loc>
+    <loc>https://mermaid.baimuxym.cn/ja/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://mermaid.baimuxym.cn/zh-CN/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mermaid.baimuxym.cn/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mermaid.baimuxym.cn/ja/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mermaid.baimuxym.cn/zh-CN/" />
   </url>
   <url>
-    <loc>https://your-domain.com/zh-CN/guide/</loc>
+    <loc>https://mermaid.baimuxym.cn/zh-CN/guide/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-domain.com/en/guide/</loc>
+    <loc>https://mermaid.baimuxym.cn/en/guide/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-domain.com/ja/guide/</loc>
+    <loc>https://mermaid.baimuxym.cn/ja/guide/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

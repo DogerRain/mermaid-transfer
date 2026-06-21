@@ -9,19 +9,19 @@
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
     <meta name="author" content="Mermaid オンライン" />
-    <link rel="canonical" href="https://your-domain.com/ja/" />
-    <link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
-    <link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
-    <link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
-    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <link rel="canonical" href="https://mermaid.baimuxym.cn/ja/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://mermaid.baimuxym.cn/zh-CN/" />
+    <link rel="alternate" hreflang="en" href="https://mermaid.baimuxym.cn/en/" />
+    <link rel="alternate" hreflang="ja" href="https://mermaid.baimuxym.cn/ja/" />
+    <link rel="alternate" hreflang="x-default" href="https://mermaid.baimuxym.cn/zh-CN/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/icon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content="Mermaid オンライン - リアルタイム図表エディタ" />
     <meta property="og:description" content="Mermaid コードを書いて即座にプレビュー。SVG/PNG エクスポート。フローチャート、シーケンス図、ガントチャートなどに対応。" />
-    <meta property="og:image" content="https://your-domain.com/icon.svg" />
-    <meta property="og:url" content="https://your-domain.com/ja/" />
+    <meta property="og:image" content="https://mermaid.baimuxym.cn/icon.svg" />
+    <meta property="og:url" content="https://mermaid.baimuxym.cn/ja/" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Mermaid オンライン - リアルタイム図表エディタ" />
     <meta name="twitter:description" content="Mermaid コードを書いて即座にプレビュー。SVG/PNG エクスポート。フローチャート、シーケンス図、ガントチャートなどに対応。" />
@@ -140,6 +140,7 @@
             <button type="button" class="btn" id="zoom-100" title="1:1">1:1</button>
           </div>
           <div class="export-controls">
+            <button type="button" class="btn btn-copy-image" id="copy-image" data-i18n="copyImage" data-i18n-title="copyImageTitle" title="Copy as Image">Copy as Image</button>
             <button type="button" class="btn btn-primary" id="export-svg" data-i18n="exportSvg">Export SVG</button>
             <button type="button" class="btn btn-primary" id="export-png" data-i18n="exportPng">Export PNG</button>
           </div>
@@ -157,26 +158,6 @@
         </div>
       </section>
     </main>
-
-    <footer class="seo-footer">
-      <details>
-        <summary>このツールについて</summary>
-        <div class="seo-body">
-          <h1>Mermaid オンラインエディタ</h1>
-          <p>無料のブラウザ版 Mermaid エディタ。左でコードを書き、右でリアルタイムプレビュー。フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなどに対応。テーマ切替、手描きスタイル、ズーム/パン、SVG/PNG エクスポート。レンダリングはブラウザ内で完結します。</p>
-          <p>対応図表：フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、円グラフ、マインドマップ、タイムライン、ユーザージャーニー、Git 図、クアドラント、要件図、サンキー、ブロック図。</p>
-          <h2>よくある質問</h2>
-          <dl>
-            <dt>どのような図に対応していますか？</dt>
-            <dd>フローチャート、シーケンス図、ガントチャート、クラス図、状態図、ER 図、マインドマップなど、主要な Mermaid 構文に対応しています。</dd>
-            <dt>PNG や SVG へのエクスポート方法は？</dt>
-            <dd>プレビュー欄の「SVG エクスポート」「PNG エクスポート」ボタンから、現在の図をダウンロードできます。</dd>
-            <dt>データはサーバーに送信されますか？</dt>
-            <dd>いいえ。図はブラウザ内でレンダリングされ、コードはサーバーに送信されません。</dd>
-          </dl>
-        </div>
-      </details>
-    </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -1,13 +1,13 @@
 # Mermaid Editor - SEO / Sitemap URLs
-# Replace https://your-domain.com with your production domain before submitting to search engines.
+# Replace https://mermaid.baimuxym.cn with your production domain before submitting to search engines.
 
-https://your-domain.com/zh-CN/
-https://your-domain.com/en/
-https://your-domain.com/ja/
+https://mermaid.baimuxym.cn/zh-CN/
+https://mermaid.baimuxym.cn/en/
+https://mermaid.baimuxym.cn/ja/
 
-https://your-domain.com/zh-CN/guide/
-https://your-domain.com/en/guide/
-https://your-domain.com/ja/guide/
+https://mermaid.baimuxym.cn/zh-CN/guide/
+https://mermaid.baimuxym.cn/en/guide/
+https://mermaid.baimuxym.cn/ja/guide/
 
-https://your-domain.com/robots.txt
-https://your-domain.com/sitemap.xml
+https://mermaid.baimuxym.cn/robots.txt
+https://mermaid.baimuxym.cn/sitemap.xml

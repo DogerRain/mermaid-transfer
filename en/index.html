@@ -9,19 +9,19 @@
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
     <meta name="author" content="Mermaid Live Editor" />
-    <link rel="canonical" href="https://your-domain.com/en/" />
-    <link rel="alternate" hreflang="zh-CN" href="https://your-domain.com/zh-CN/" />
-    <link rel="alternate" hreflang="en" href="https://your-domain.com/en/" />
-    <link rel="alternate" hreflang="ja" href="https://your-domain.com/ja/" />
-    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/zh-CN/" />
+    <link rel="canonical" href="https://mermaid.baimuxym.cn/en/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://mermaid.baimuxym.cn/zh-CN/" />
+    <link rel="alternate" hreflang="en" href="https://mermaid.baimuxym.cn/en/" />
+    <link rel="alternate" hreflang="ja" href="https://mermaid.baimuxym.cn/ja/" />
+    <link rel="alternate" hreflang="x-default" href="https://mermaid.baimuxym.cn/zh-CN/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/icon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Mermaid Live Editor - Real-time Diagram Preview" />
     <meta property="og:description" content="Write Mermaid code and preview instantly. Export SVG/PNG. Supports flowchart, sequence, gantt, class, state, ER, mindmap and more." />
-    <meta property="og:image" content="https://your-domain.com/icon.svg" />
-    <meta property="og:url" content="https://your-domain.com/en/" />
+    <meta property="og:image" content="https://mermaid.baimuxym.cn/icon.svg" />
+    <meta property="og:url" content="https://mermaid.baimuxym.cn/en/" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Mermaid Live Editor - Real-time Diagram Preview" />
     <meta name="twitter:description" content="Write Mermaid code and preview instantly. Export SVG/PNG. Supports flowchart, sequence, gantt, class, state, ER, mindmap and more." />
@@ -140,6 +140,7 @@
             <button type="button" class="btn" id="zoom-100" title="1:1">1:1</button>
           </div>
           <div class="export-controls">
+            <button type="button" class="btn btn-copy-image" id="copy-image" data-i18n="copyImage" data-i18n-title="copyImageTitle" title="Copy as Image">Copy as Image</button>
             <button type="button" class="btn btn-primary" id="export-svg" data-i18n="exportSvg">Export SVG</button>
             <button type="button" class="btn btn-primary" id="export-png" data-i18n="exportPng">Export PNG</button>
           </div>
@@ -157,26 +158,6 @@
         </div>
       </section>
     </main>
-
-    <footer class="seo-footer">
-      <details>
-        <summary>About this tool</summary>
-        <div class="seo-body">
-          <h1>Mermaid Live Editor</h1>
-          <p>A free browser-based Mermaid editor: write code on the left, preview on the right. Supports flowcharts, sequence diagrams, gantt charts, class/state/ER diagrams, mind maps, and more. Switch themes, hand-drawn style, zoom/pan, and export SVG or PNG. Rendering runs locally in your browser.</p>
-          <p>Supported: flowchart, sequence diagram, gantt chart, class diagram, state diagram, ER diagram, pie chart, mind map, timeline, user journey, git graph, quadrant chart, requirement diagram, sankey, block diagram.</p>
-          <h2>FAQ</h2>
-          <dl>
-            <dt>What diagram types are supported?</dt>
-            <dd>Flowchart, sequence, gantt, class, state, ER, pie, mindmap, timeline, journey, git graph, quadrant, requirement, sankey, and block diagrams.</dd>
-            <dt>How do I export PNG or SVG?</dt>
-            <dd>Use the Export SVG or Export PNG buttons in the preview toolbar to download the current diagram.</dd>
-            <dt>Is my data uploaded?</dt>
-            <dd>No. Diagrams are rendered locally in your browser; your code is not sent to a server.</dd>
-          </dl>
-        </div>
-      </details>
-    </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>

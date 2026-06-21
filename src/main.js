@@ -201,6 +201,30 @@ function showError(message) {
   errorBanner.classList.remove('hidden');
 }
 
+let toastTimer = null;
+
+function showToast(message, duration = 2000) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+  }
+
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.remove('is-hiding');
+  toast.classList.add('is-visible');
+
+  toastTimer = setTimeout(() => {
+    toast.classList.add('is-hiding');
+    toast.classList.remove('is-visible');
+  }, duration);
+}
+
 function cacheSvgBaseSize() {
   if (!currentSvg) return;
   const { width, height } = getSvgDimensions(currentSvg);
@@ -594,7 +618,11 @@ function downloadDataUrl(dataUrl, filename) {
   a.remove();
 }
 
-function drawSvgToPngDataUrl(payload, scale) {
+function getRasterExportScale() {
+  return Math.max(2, window.devicePixelRatio || 1);
+}
+
+function drawSvgToCanvas(payload, scale) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const svgBlob = new Blob([payload.svg], { type: 'image/svg+xml;charset=utf-8' });
@@ -611,12 +639,12 @@ function drawSvgToPngDataUrl(payload, scale) {
           return;
         }
 
-        // 填充白色背景
-        ctx.fillStyle = '#ffffff';
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.fillStyle = payload.background || '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.scale(scale, scale);
-        ctx.drawImage(img, 0, 0, payload.width, payload.height);
-        resolve(canvas.toDataURL('image/png'));
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas);
       } catch (err) {
         reject(err);
       } finally {
@@ -631,6 +659,22 @@ function drawSvgToPngDataUrl(payload, scale) {
 
     img.src = url;
   });
+}
+
+function drawSvgToPngDataUrl(payload, scale) {
+  return drawSvgToCanvas(payload, scale).then((canvas) => canvas.toDataURL('image/png'));
+}
+
+function drawSvgToPngBlob(payload, scale) {
+  return drawSvgToCanvas(payload, scale).then(
+    (canvas) =>
+      new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) resolve(blob);
+          else reject(new Error('无法生成 PNG'));
+        }, 'image/png');
+      })
+  );
 }
 
 function downloadBlob(blob, filename) {
@@ -656,7 +700,7 @@ function exportSvg() {
   setStatus(t('statusExportedSvg'));
 }
 
-function exportPng(scale = 2) {
+function exportPng(scale = getRasterExportScale()) {
   const payload = getExportSvgPayload(true);
   if (!payload) {
     setStatus(t('statusNoExport'), true);
@@ -675,6 +719,33 @@ function exportPng(scale = 2) {
       setStatus(t('statusExportFail'), true);
       showError(t('exportFailDetail', { msg: message }));
     });
+}
+
+async function copyImageToClipboard() {
+  const payload = getExportSvgPayload(true);
+  if (!payload) {
+    setStatus(t('statusNoExport'), true);
+    return;
+  }
+
+  if (!window.isSecureContext || !navigator.clipboard?.write) {
+    setStatus(t('copyImageFail'), true);
+    showError(t('copyImageFailDetail', { msg: 'Clipboard API unavailable' }));
+    return;
+  }
+
+  setStatus(t('statusCopyingImage'));
+  try {
+    const blob = await drawSvgToPngBlob(payload, getRasterExportScale());
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    setStatus(t('copyImageOk'));
+    showToast(t('copyImageToast'));
+    showError(null);
+  } catch (err) {
+    const message = err?.message || String(err);
+    setStatus(t('copyImageFail'), true);
+    showError(t('copyImageFailDetail', { msg: message }));
+  }
 }
 
 function setupPanZoom() {
@@ -761,6 +832,7 @@ document.getElementById('zoom-out').addEventListener('click', () => {
 
 document.getElementById('zoom-reset').addEventListener('click', fitToView);
 document.getElementById('zoom-100').addEventListener('click', resetView);
+document.getElementById('copy-image').addEventListener('click', copyImageToClipboard);
 document.getElementById('export-svg').addEventListener('click', exportSvg);
 document.getElementById('export-png').addEventListener('click', () => exportPng(2));
 
