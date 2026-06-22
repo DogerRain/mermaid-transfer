@@ -536,6 +536,22 @@ body.guide-lightbox-open {
   color: var(--accent-hover);
 }
 
+.guide-qrcode {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+.guide-qrcode img {
+  display: inline-block;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+}
+
 .site-updated {
   margin: 1.5rem 0 0;
   font-size: 0.85rem;

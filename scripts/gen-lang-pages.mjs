@@ -17,13 +17,13 @@ const LANGS = {
     description:
       '免费 Mermaid 在线编辑器：实时预览流程图、时序图、甘特图、类图、状态图、ER 图、思维导图等，支持主题切换、手绘风格、导出 SVG 与 PNG。',
     keywords:
-      'Mermaid,Mermaid在线,Mermaid编辑器,Mermaid流程图,Mermaid时序图,Mermaid甘特图,流程图在线,时序图在线,甘特图在线,UML在线,图表代码编辑器',
+      'mermaid 在线,Mermaid,Mermaid在线,Mermaid编辑器,Mermaid流程图,Mermaid时序图,Mermaid甘特图,流程图在线,时序图在线,甘特图在线,UML在线,图表代码编辑器',
     ogTitle: 'Mermaid 在线渲染 - 实时预览图表编辑器',
     ogDescription:
       '在线编写 Mermaid 代码，实时预览并导出 SVG / PNG，支持流程图、时序图、甘特图等多种图表。',
     jsonName: 'Mermaid 在线渲染',
     jsonDesc: '免费在线 Mermaid 图表编辑器，支持实时预览与导出 SVG、PNG。',
-    jsonKeywords: 'Mermaid, 流程图, 时序图, 甘特图, 在线编辑器',
+    jsonKeywords: 'mermaid 在线, Mermaid, 流程图, 时序图, 甘特图, 在线编辑器',
     currency: 'CNY',
     navGuide: 'Mermaid 教程',
     guidePath: '/zh-CN/guide/',
@@ -39,13 +39,13 @@ const LANGS = {
     description:
       'Free online Mermaid editor with live preview for flowcharts, sequence diagrams, gantt charts, class diagrams, ER diagrams, mind maps, and more. Export SVG/PNG, themes, hand-drawn style.',
     keywords:
-      'Mermaid,mermaid live editor,mermaid diagram,flowchart online,sequence diagram,gantt chart,uml diagram,diagram as code,mermaid export png,mermaid export svg',
+      'mermaid online,Mermaid,mermaid live editor,mermaid diagram,flowchart online,sequence diagram,gantt chart,uml diagram,diagram as code,mermaid export png,mermaid export svg',
     ogTitle: 'Mermaid Live Editor - Real-time Diagram Preview',
     ogDescription:
       'Write Mermaid code and preview instantly. Export SVG/PNG. Supports flowchart, sequence, gantt, class, state, ER, mindmap and more.',
     jsonName: 'Mermaid Live Editor',
     jsonDesc: 'Free online Mermaid diagram editor with live preview and SVG/PNG export.',
-    jsonKeywords: 'Mermaid, flowchart, sequence diagram, gantt chart, online editor',
+    jsonKeywords: 'mermaid online, Mermaid, flowchart, sequence diagram, gantt chart, online editor',
     currency: 'USD',
     navGuide: 'Mermaid Guide',
     guidePath: '/en/guide/',
@@ -61,13 +61,13 @@ const LANGS = {
     description:
       '無料の Mermaid オンラインエディタ。フローチャート、シーケンス図、ガントチャート、クラス図、ER 図、マインドマップなどをリアルタイムプレビュー。SVG/PNG エクスポート、テーマ、手描きスタイル対応。',
     keywords:
-      'Mermaid,Mermaid エディタ,フローチャート,シーケンス図,ガントチャート,UML,ダイアグラム,SVG エクスポート,PNG エクスポート,オンライン',
+      'mermaid オンライン,Mermaid,Mermaid エディタ,フローチャート,シーケンス図,ガントチャート,UML,ダイアグラム,SVG エクスポート,PNG エクスポート,オンライン',
     ogTitle: 'Mermaid オンライン - リアルタイム図表エディタ',
     ogDescription:
       'Mermaid コードを書いて即座にプレビュー。SVG/PNG エクスポート。フローチャート、シーケンス図、ガントチャートなどに対応。',
     jsonName: 'Mermaid オンライン',
     jsonDesc: '無料の Mermaid オンラインエディタ。リアルタイムプレビューと SVG/PNG エクスポートに対応。',
-    jsonKeywords: 'Mermaid, フローチャート, シーケンス図, ガントチャート, オンラインエディタ',
+    jsonKeywords: 'mermaid オンライン, Mermaid, フローチャート, シーケンス図, ガントチャート, オンラインエディタ',
     currency: 'JPY',
     navGuide: 'Mermaid チュートリアル',
     guidePath: '/ja/guide/',

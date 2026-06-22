@@ -8,6 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 const SITE = 'https://mermaid.baimuxym.cn';
+const WECHAT_QR_URL =
+  'https://rainyudianxx.baimuxym.cn/HelloCoder/home/wuli_HelloCoder.png';
 
 const LANGS = {
   'zh-CN': {
@@ -41,7 +43,14 @@ const LANGS = {
         },
         {
           h2: '联系我们',
-          p: `如有问题、建议或合作意向，请通过博客留言与我们联系：<a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>`,
+          p: `如有问题、建议或合作意向，请通过 HelloCoder 博客留言：<a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>。也可扫描下方微信公众号二维码与我们取得联系。`,
+        },
+        {
+          h2: '微信公众号联系我',
+          img: {
+            src: WECHAT_QR_URL,
+            alt: 'HelloCoder 微信公众号二维码',
+          },
         },
       ],
     },
@@ -105,7 +114,14 @@ const LANGS = {
         },
         {
           h2: 'Contact',
-          p: `Questions, feedback, or partnership inquiries: reach us via the blog at <a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>`,
+          p: `Questions, feedback, or partnership inquiries: reach us via the HelloCoder blog at <a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>. You can also scan the WeChat Official Account QR code below.`,
+        },
+        {
+          h2: 'Contact via WeChat Official Account',
+          img: {
+            src: WECHAT_QR_URL,
+            alt: 'HelloCoder WeChat Official Account QR code',
+          },
         },
       ],
     },
@@ -169,7 +185,14 @@ const LANGS = {
         },
         {
           h2: 'お問い合わせ',
-          p: `ご質問・ご意見はブログからお願いします：<a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>`,
+          p: `ご質問・ご意見は HelloCoder ブログからお願いします：<a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${BLOG_URL}</a>。下の WeChat 公式アカウントの QR コードからもご連絡いただけます。`,
+        },
+        {
+          h2: 'WeChat 公式アカウントで連絡',
+          img: {
+            src: WECHAT_QR_URL,
+            alt: 'HelloCoder WeChat 公式アカウント QR コード',
+          },
         },
       ],
     },
@@ -208,12 +231,15 @@ function renderPage(cfg, dir, pageKey) {
   const page = cfg[pageKey];
   const pageType = pageKey;
   const sections = page.sections
-    .map(
-      (s) => `<section class="guide-section">
-        <h2>${s.h2}</h2>
-        <p>${s.p}</p>
-      </section>`,
-    )
+    .map((s) => {
+      const p = s.p ? `\n        <p>${s.p}</p>` : '';
+      const img = s.img
+        ? `\n        <figure class="guide-qrcode"><img src="${s.img.src}" alt="${s.img.alt}" loading="lazy" decoding="async" /></figure>`
+        : '';
+      return `<section class="guide-section">
+        <h2>${s.h2}</h2>${p}${img}
+      </section>`;
+    })
     .join('\n            ');
   const updated = page.updated ? `<p class="site-updated">${page.updated}</p>` : '';
 
