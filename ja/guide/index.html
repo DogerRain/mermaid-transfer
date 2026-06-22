@@ -1,21 +1,71 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-default-lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mermaid チュートリアル - フローチャート・シーケンス図・ガントチャート</title>
     <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S80HSYVQJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S80HSYVQJE');
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/guide.css" />
   </head>
-  <body>
-    <header class="guide-header">
-      <a class="guide-brand" href="/ja/">Mermaid オンライン</a>
-      <nav class="guide-nav">
-        <a class="guide-nav-link is-active" href="/ja/guide/">Mermaid チュートリアル</a>
-        <a class="guide-nav-link guide-nav-cta" href="/ja/">エディタを開く</a>
-      </nav>
+  <body data-guide-close="閉じる">
+    <header class="app-header">
+      <a class="brand" href="/ja/">
+        <svg class="brand-icon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <defs>
+            <linearGradient id="brand-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="url(#brand-bg)"/>
+          <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="12" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M19 24v4h13v4"/>
+            <rect x="24" y="32" width="18" height="12" rx="3" fill="#fff"/>
+            <path d="M33 44v4h13"/>
+            <polygon points="46,48 52,45 46,42" fill="#fff" stroke="none"/>
+            <rect x="36" y="12" width="18" height="12" rx="6" fill="#fffbeb" stroke="#fef3c7"/>
+          </g>
+        </svg>
+        <span class="brand-title" data-i18n="brand">Mermaid オンライン</span>
+      </a>
+      <a class="header-guide-link is-active" href="/ja/guide/">Mermaid チュートリアル</a>
+      <a class="header-meta-link" href="/ja/about/">について</a>
+      <a class="header-meta-link" href="/ja/privacy/">プライバシー</a>
+      <div class="header-actions">
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button type="button" class="lang-toggle" id="lang-toggle" title="Language">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="lang-label"></span>
+          </button>
+          <div class="lang-menu" id="lang-menu">
+            <a class="lang-option" data-lang="zh" href="/zh-CN/guide/">中文</a>
+            <a class="lang-option" data-lang="en" href="/en/guide/">English</a>
+            <a class="lang-option" data-lang="ja" href="/ja/guide/">日本語</a>
+          </div>
+        </div>
+        <a class="header-blog-link" href="https://learnjava.baimuxym.cn/" target="_blank" rel="noopener noreferrer" title="HelloCoder Blog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </a>
+      </div>
     </header>
     <div class="guide-shell">
       <aside class="guide-sidebar" id="guide-sidebar">
@@ -147,7 +197,10 @@
     A[開始] --&gt; B{判定}
     B --&gt;|はい| C[実行]
     B --&gt;|いいえ| D[終了]</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -160,7 +213,10 @@
     participant API
     ユーザー-&gt;&gt;API: リクエスト
     API--&gt;&gt;ユーザー: レスポンス</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -174,7 +230,10 @@
     section 開発
     分析 :a1, 2025-01-01, 7d
     実装 :a2, after a1, 10d</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -191,7 +250,10 @@
         +bark()
     }
     Animal &lt;|-- Dog</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -204,7 +266,10 @@
     待機 --&gt; 実行中: 開始
     実行中 --&gt; 完了: 終了
     完了 --&gt; [*]</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -219,7 +284,10 @@
         string id
         string name
     }</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -231,7 +299,10 @@
     "A" : 40
     "B" : 35
     "C" : 25</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -246,7 +317,10 @@
     技術
       フロント
       バック</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -260,7 +334,10 @@
     2025-02 : 設計レビュー
     2025-03 : 開発完了
     2025-04 : リリース</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -276,7 +353,10 @@
     section 購入
       座席選択: 4: ユーザー
       支払い: 2: ユーザー, システム</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -291,7 +371,10 @@
     commit id: "feat-A"
     checkout main
     merge develop id: "release-1.0"</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -309,7 +392,10 @@
     quadrant-4 監視
     バグ修正: [0.8, 0.9]
     新機能: [0.7, 0.5]</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -322,7 +408,10 @@
     A["入力"] B["処理"] C["出力"]
     A --&gt; B
     B --&gt; C</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -336,7 +425,10 @@ Visit,Signup,5
 Visit,Leave,20
 Signup,Trial,4
 Trial,Pay,3</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -355,7 +447,10 @@ Trial,Pay,3</code></pre>
         type: system
     }
     auth_module - satisfies -&gt; user_login</code></pre>
-        <p class="guide-preview-label">プレビュー</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">プレビュー</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="拡大"><svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+        </div>
         <div class="guide-preview" role="img" aria-label="プレビュー"></div>
       </div>
       </section>
@@ -371,6 +466,14 @@ Trial,Pay,3</code></pre>
         </article>
       </main>
     </div>
+    <footer class="site-footer">
+      <div class="site-footer-links">
+        <a href="/ja/about/">このサイトについて</a>
+        <a href="/ja/privacy/">プライバシーポリシー</a>
+        <a href="/ja/guide/">Mermaid チュートリアル</a>
+        <a href="https://learnjava.baimuxym.cn/" target="_blank" rel="noopener noreferrer">HelloCoder ブログ</a>
+      </div>
+    </footer>
     <script type="module" src="/src/guide.js"></script>
   </body>
 </html>

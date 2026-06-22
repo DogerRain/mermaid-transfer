@@ -9,5 +9,12 @@ https://mermaid.baimuxym.cn/zh-CN/guide/
 https://mermaid.baimuxym.cn/en/guide/
 https://mermaid.baimuxym.cn/ja/guide/
 
+https://mermaid.baimuxym.cn/zh-CN/about/
+https://mermaid.baimuxym.cn/zh-CN/privacy/
+https://mermaid.baimuxym.cn/en/about/
+https://mermaid.baimuxym.cn/en/privacy/
+https://mermaid.baimuxym.cn/ja/about/
+https://mermaid.baimuxym.cn/ja/privacy/
+
 https://mermaid.baimuxym.cn/robots.txt
 https://mermaid.baimuxym.cn/sitemap.xml

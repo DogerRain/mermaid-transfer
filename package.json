@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/gen-lang-pages.mjs && node scripts/gen-guide-pages.mjs",
+    "predev": "node scripts/gen-lang-pages.mjs && node scripts/gen-guide-pages.mjs && node scripts/gen-static-pages.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/gen-lang-pages.mjs && node scripts/gen-guide-pages.mjs",
+    "prebuild": "node scripts/gen-lang-pages.mjs && node scripts/gen-guide-pages.mjs && node scripts/gen-static-pages.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -1,5 +1,6 @@
 import mermaid from 'mermaid';
-import { t, getLang, initI18n } from './i18n.js';
+import { t, getLang } from './i18n.js';
+import { initHeader } from './header.js';
 
 const DEFAULT_SOURCE = `graph TD
     A[开始] --> B{判断}
@@ -873,26 +874,12 @@ gridToggle.addEventListener('click', () => {
   updateSwitchButtons();
 });
 
-// 语言下拉切换
-const langDropdown = document.getElementById('lang-dropdown');
-const langMenu = document.getElementById('lang-menu');
-document.getElementById('lang-toggle').addEventListener('click', (e) => {
-  e.stopPropagation();
-  langDropdown.classList.toggle('open');
-});
-langMenu.querySelectorAll('.lang-option').forEach((link) => {
-  link.addEventListener('click', () => {
-    langDropdown.classList.remove('open');
-  });
-});
-document.addEventListener('click', () => langDropdown.classList.remove('open'));
-
 window.addEventListener('resize', () => {
   if (currentSvg) fitToView();
 });
 
 editor.value = DEFAULT_SOURCE;
-initI18n();
+initHeader();
 initMermaid(themeSelect.value);
 setupPanZoom();
 setupResizer();

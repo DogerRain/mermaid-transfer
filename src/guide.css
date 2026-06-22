@@ -1,6 +1,9 @@
+@import './header.css';
+
 :root {
   --bg-app: #0f1419;
   --bg-header: #161b22;
+  --bg-panel: #1c2128;
   --text: #e6edf3;
   --text-muted: #8b949e;
   --accent: #58a6ff;
@@ -33,65 +36,6 @@ body {
   background: var(--bg-app);
   color: var(--text);
   line-height: 1.65;
-}
-
-.guide-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  height: 48px;
-  padding: 0 1rem;
-  background: var(--bg-header);
-  border-bottom: 1px solid var(--border);
-}
-
-.guide-brand {
-  font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.guide-brand:hover {
-  color: var(--accent);
-}
-
-.guide-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.guide-nav-link {
-  padding: 0.35rem 0.65rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 6px;
-}
-
-.guide-nav-link:hover {
-  color: var(--accent);
-  border-color: var(--border);
-}
-
-.guide-nav-link.is-active {
-  color: var(--accent);
-  border-color: var(--border);
-  background: rgba(88, 166, 255, 0.08);
-}
-
-.guide-nav-cta {
-  color: #fff;
-  background: #0969da;
-  border-color: #0969da;
-}
-
-.guide-nav-cta:hover {
-  background: #0550ae;
-  border-color: #0550ae;
-  color: #fff;
 }
 
 .guide-shell {
@@ -316,15 +260,54 @@ body {
   border-bottom: none;
 }
 
-.guide-preview-label {
+.guide-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   margin: 0;
   padding: 0.4rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
   background: #1c2128;
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
+}
+
+.guide-preview-label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.guide-preview-enlarge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.guide-preview-enlarge-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.guide-preview-enlarge:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.guide-preview-enlarge:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 .guide-preview {
@@ -334,7 +317,7 @@ body {
   min-height: 72px;
   max-height: 200px;
   padding: 0.5rem 0.75rem;
-  overflow: auto;
+  overflow: hidden;
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 0 0 8px 8px;
@@ -342,10 +325,7 @@ body {
 
 .guide-preview svg {
   display: block;
-  max-width: 100%;
-  max-height: 160px;
-  width: auto;
-  height: auto;
+  flex-shrink: 0;
 }
 
 .guide-preview.is-error {
@@ -357,6 +337,97 @@ body {
   background: #fff5f5;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.guide-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.guide-lightbox[hidden] {
+  display: none;
+}
+
+.guide-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 20, 25, 0.82);
+}
+
+.guide-lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(960px, 95vw);
+  height: min(720px, 90vh);
+  max-height: 90vh;
+  padding: 2.75rem 1.5rem 1.5rem;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.guide-lightbox-viewport {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.guide-lightbox-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.guide-lightbox-close:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.guide-lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.guide-lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-lightbox-content svg {
+  display: block;
+  flex-shrink: 0;
+  max-width: none;
+  max-height: none;
+}
+
+body.guide-lightbox-open {
+  overflow: hidden;
 }
 
 .guide-cta-wrap {
@@ -450,4 +521,45 @@ body {
   .guide-main {
     padding: 1.25rem 1rem 2.5rem;
   }
+}
+
+.guide-static {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.guide-static .guide-section p a {
+  color: var(--accent);
+}
+
+.guide-static .guide-section p a:hover {
+  color: var(--accent-hover);
+}
+
+.site-updated {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+}
+
+.site-footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.site-footer-links a:hover {
+  color: var(--accent);
 }

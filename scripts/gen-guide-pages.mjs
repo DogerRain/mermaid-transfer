@@ -1,9 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { headAnalytics } from './head-analytics.mjs';
+import { renderAppHeader, BLOG_URL } from './app-header.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
+
+const PREVIEW_ENLARGE_ICON = `<svg class="guide-preview-enlarge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
 
 const GUIDES = {
   'zh-CN': {
@@ -14,6 +18,11 @@ const GUIDES = {
     brand: 'Mermaid 在线渲染',
     navEditor: '打开编辑器',
     navGuide: 'Mermaid 教程',
+    navAbout: '关于本站',
+    navPrivacy: '隐私政策',
+    aboutPath: '/zh-CN/about/',
+    privacyPath: '/zh-CN/privacy/',
+    footerBlog: 'HelloCoder 博客',
     h1: 'Mermaid 入门教程',
     intro:
       'Mermaid 是一种用纯文本描述图表的语言（Diagram as Code）。你只需编写简单的语法，即可生成流程图、时序图、甘特图等，并导出 SVG / PNG。本教程覆盖最常用的语法与示例，可直接复制到左侧编辑器中试用。',
@@ -205,6 +214,8 @@ Trial,Pay,3`,
     ],
     cta: '立即打开编辑器体验',
     previewLabel: '预览',
+    previewEnlarge: '放大',
+    previewClose: '关闭',
   },
   en: {
     langPath: '/en/',
@@ -214,6 +225,11 @@ Trial,Pay,3`,
     brand: 'Mermaid Online',
     navEditor: 'Open Editor',
     navGuide: 'Mermaid Guide',
+    navAbout: 'About',
+    navPrivacy: 'Privacy',
+    aboutPath: '/en/about/',
+    privacyPath: '/en/privacy/',
+    footerBlog: 'HelloCoder Blog',
     h1: 'Mermaid Tutorial',
     intro:
       'Mermaid lets you create diagrams from text. This guide covers the most common diagram types with copy-paste examples you can try in the editor.',
@@ -405,6 +421,8 @@ Trial,Pay,3`,
     ],
     cta: 'Try the Editor',
     previewLabel: 'Preview',
+    previewEnlarge: 'Enlarge',
+    previewClose: 'Close',
   },
   ja: {
     langPath: '/ja/',
@@ -414,6 +432,11 @@ Trial,Pay,3`,
     brand: 'Mermaid オンライン',
     navEditor: 'エディタを開く',
     navGuide: 'Mermaid チュートリアル',
+    navAbout: 'このサイトについて',
+    navPrivacy: 'プライバシーポリシー',
+    aboutPath: '/ja/about/',
+    privacyPath: '/ja/privacy/',
+    footerBlog: 'HelloCoder ブログ',
     h1: 'Mermaid チュートリアル',
     intro:
       'Mermaid はテキストで図を記述する言語です。フローチャート、シーケンス図、ガントチャートなどの基本構文と例を紹介します。',
@@ -604,6 +627,8 @@ Trial,Pay,3`,
     ],
     cta: 'エディタで試す',
     previewLabel: 'プレビュー',
+    previewEnlarge: '拡大',
+    previewClose: '閉じる',
   },
 };
 
@@ -659,13 +684,27 @@ ${items}
       </aside>`;
 }
 
-function renderGuide(cfg) {
+function renderGuideFooter(cfg) {
+  return `    <footer class="site-footer">
+      <div class="site-footer-links">
+        <a href="${cfg.aboutPath}">${cfg.navAbout}</a>
+        <a href="${cfg.privacyPath}">${cfg.navPrivacy}</a>
+        <a href="${cfg.guidePath}">${cfg.navGuide}</a>
+        <a href="${BLOG_URL}" target="_blank" rel="noopener noreferrer">${cfg.footerBlog}</a>
+      </div>
+    </footer>`;
+}
+
+function renderGuide(cfg, dir) {
   const sections = cfg.sections
     .map((s) => {
       const codeBlock = s.code
         ? `<div class="guide-demo">
         <pre class="guide-code"><code>${escapeHtml(s.code)}</code></pre>
-        <p class="guide-preview-label">${cfg.previewLabel}</p>
+        <div class="guide-preview-header">
+          <span class="guide-preview-label">${cfg.previewLabel}</span>
+          <button type="button" class="guide-preview-enlarge" aria-label="${cfg.previewEnlarge}">${PREVIEW_ENLARGE_ICON}</button>
+        </div>
         <div class="guide-preview" role="img" aria-label="${cfg.previewLabel}"></div>
       </div>`
         : '';
@@ -678,24 +717,18 @@ function renderGuide(cfg) {
     .join('\n');
 
   return `<!DOCTYPE html>
-<html lang="${cfg.htmlLang}">
+<html lang="${cfg.htmlLang}" data-default-lang="${dir === 'zh-CN' ? 'zh' : dir}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${cfg.title}</title>
     <meta name="robots" content="index, follow" />
-    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+${headAnalytics}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/guide.css" />
   </head>
-  <body>
-    <header class="guide-header">
-      <a class="guide-brand" href="${cfg.langPath}">${cfg.brand}</a>
-      <nav class="guide-nav">
-        <a class="guide-nav-link is-active" href="${cfg.guidePath}">${cfg.navGuide}</a>
-        <a class="guide-nav-link guide-nav-cta" href="${cfg.langPath}">${cfg.navEditor}</a>
-      </nav>
-    </header>
+  <body data-guide-close="${cfg.previewClose}">
+${renderAppHeader(dir, 'guide')}
     <div class="guide-shell">
 ${renderSidebar(cfg)}
       <main class="guide-main">
@@ -713,6 +746,7 @@ ${renderSidebar(cfg)}
         </article>
       </main>
     </div>
+${renderGuideFooter(cfg)}
     <script type="module" src="/src/guide.js"></script>
   </body>
 </html>`;
@@ -721,7 +755,7 @@ ${renderSidebar(cfg)}
 for (const [dir, cfg] of Object.entries(GUIDES)) {
   const outDir = path.join(root, dir, 'guide');
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'index.html'), renderGuide(cfg), 'utf8');
+  fs.writeFileSync(path.join(outDir, 'index.html'), renderGuide(cfg, dir), 'utf8');
 }
 
 console.log('Generated guide pages: zh-CN, en, ja');

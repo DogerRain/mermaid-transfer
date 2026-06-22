@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { headAnalytics } from './head-analytics.mjs';
+import { renderAppHeader } from './app-header.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -25,6 +27,10 @@ const LANGS = {
     currency: 'CNY',
     navGuide: 'Mermaid 教程',
     guidePath: '/zh-CN/guide/',
+    navAbout: '关于',
+    navPrivacy: '隐私',
+    aboutPath: '/zh-CN/about/',
+    privacyPath: '/zh-CN/privacy/',
   },
   en: {
     key: 'en',
@@ -43,6 +49,10 @@ const LANGS = {
     currency: 'USD',
     navGuide: 'Mermaid Guide',
     guidePath: '/en/guide/',
+    navAbout: 'About',
+    navPrivacy: 'Privacy',
+    aboutPath: '/en/about/',
+    privacyPath: '/en/privacy/',
   },
   ja: {
     key: 'ja',
@@ -61,6 +71,10 @@ const LANGS = {
     currency: 'JPY',
     navGuide: 'Mermaid チュートリアル',
     guidePath: '/ja/guide/',
+    navAbout: 'について',
+    navPrivacy: 'プライバシー',
+    aboutPath: '/ja/about/',
+    privacyPath: '/ja/privacy/',
   },
 };
 
@@ -87,7 +101,7 @@ function head(cfg, dir) {
     <meta name="description" content="${cfg.description}" />
     <meta name="keywords" content="${cfg.keywords}" />
     <meta name="robots" content="index, follow" />
-    <meta name="google-site-verification" content="i_rImxUz8IK5zedSClxerX-sEpZs_T1oRE2S15KqdxA" />
+${headAnalytics}
     <meta name="author" content="${cfg.jsonName}" />
     <link rel="canonical" href="${canonical}" />
 ${hreflangLinks()}
@@ -119,55 +133,10 @@ ${hreflangLinks()}
   </head>`;
 }
 
-function body(cfg) {
+function body(dir) {
   return `
   <body>
-    <header class="app-header">
-      <div class="brand">
-        <svg class="brand-icon" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
-          <defs>
-            <linearGradient id="brand-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fbbf24"/>
-              <stop offset="100%" stop-color="#d97706"/>
-            </linearGradient>
-          </defs>
-          <rect width="64" height="64" rx="14" fill="url(#brand-bg)"/>
-          <g fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="10" y="12" width="18" height="12" rx="3" fill="#fff"/>
-            <path d="M19 24v4h13v4"/>
-            <rect x="24" y="32" width="18" height="12" rx="3" fill="#fff"/>
-            <path d="M33 44v4h13"/>
-            <polygon points="46,48 52,45 46,42" fill="#fff" stroke="none"/>
-            <rect x="36" y="12" width="18" height="12" rx="6" fill="#fffbeb" stroke="#fef3c7"/>
-          </g>
-        </svg>
-        <span class="brand-title" data-i18n="brand">${cfg.jsonName}</span>
-      </div>
-      <a class="header-guide-link" href="${cfg.guidePath}">${cfg.navGuide}</a>
-      <div class="header-actions">
-        <div class="lang-dropdown" id="lang-dropdown">
-          <button type="button" class="lang-toggle" id="lang-toggle" title="Language">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M2 12h20"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-            <span id="lang-label"></span>
-          </button>
-          <div class="lang-menu" id="lang-menu">
-            <a class="lang-option" data-lang="zh" href="/zh-CN/">中文</a>
-            <a class="lang-option" data-lang="en" href="/en/">English</a>
-            <a class="lang-option" data-lang="ja" href="/ja/">日本語</a>
-          </div>
-        </div>
-        <a class="header-blog-link" href="https://learnjava.baimuxym.cn/" target="_blank" rel="noopener noreferrer" title="HelloCoder Blog">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
-          </svg>
-        </a>
-      </div>
-    </header>
+${renderAppHeader(dir, 'editor')}
 
     <main class="workspace">
       <aside class="editor-panel">
@@ -277,11 +246,25 @@ ${xDefault}
     })
     .join('\n');
 
+  const staticUrls = Object.keys(LANGS)
+    .flatMap((dir) =>
+      ['about', 'privacy'].map((page) => {
+        const loc = `${SITE}/${dir}/${page}/`;
+        return `  <url>
+    <loc>${loc}</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>`;
+      }),
+    )
+    .join('\n');
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${editorUrls}
 ${guideUrls}
+${staticUrls}
 </urlset>
 `;
 }
@@ -289,7 +272,7 @@ ${guideUrls}
 for (const [dir, cfg] of Object.entries(LANGS)) {
   const outDir = path.join(root, dir);
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'index.html'), head(cfg, dir) + body(cfg), 'utf8');
+  fs.writeFileSync(path.join(outDir, 'index.html'), head(cfg, dir) + body(dir), 'utf8');
 }
 
 fs.writeFileSync(path.join(root, 'public', 'sitemap.xml'), generateSitemap(), 'utf8');
@@ -303,6 +286,10 @@ ${Object.keys(LANGS)
 
 ${Object.keys(LANGS)
   .map((d) => `${SITE}/${d}/guide/`)
+  .join('\n')}
+
+${Object.keys(LANGS)
+  .flatMap((d) => [`${SITE}/${d}/about/`, `${SITE}/${d}/privacy/`])
   .join('\n')}
 
 ${SITE}/robots.txt
