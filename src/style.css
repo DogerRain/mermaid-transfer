@@ -260,27 +260,28 @@ body {
   text-rendering: geometricPrecision;
 }
 
-.error-banner {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: 2.5rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.82rem;
-  font-family: var(--font-mono);
+.render-error {
+  max-width: 36rem;
+  padding: 1rem 1.25rem;
   color: #cf222e;
   background: #ffebe9;
   border: 1px solid #ff818266;
   border-radius: 8px;
   box-shadow: var(--shadow);
-  white-space: pre-wrap;
-  word-break: break-word;
-  max-height: 30%;
-  overflow: auto;
 }
 
-.error-banner.hidden {
-  display: none;
+.render-error-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.render-error-detail {
+  margin: 0;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .preview-hint {

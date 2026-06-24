@@ -199,7 +199,6 @@ ${renderAppHeader(dir, 'editor')}
           <div class="preview-stage" id="preview-stage">
             <div id="mermaid-output" class="mermaid-output"></div>
           </div>
-          <div id="error-banner" class="error-banner hidden" role="alert"></div>
           <div class="preview-switches" aria-label="Preview switches">
             <button type="button" class="switch-btn" id="toggle-handdrawn" data-i18n-title="toggleHandDrawn" title="Hand-drawn">✎</button>
             <button type="button" class="switch-btn is-active" id="toggle-grid" data-i18n-title="toggleGrid" title="Grid">#</button>

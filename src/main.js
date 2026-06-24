@@ -140,7 +140,6 @@ const themeSelect = document.getElementById('theme-select');
 const templateSelect = document.getElementById('template-select');
 const output = document.getElementById('mermaid-output');
 const statusText = document.getElementById('status-text');
-const errorBanner = document.getElementById('error-banner');
 const previewViewport = document.getElementById('preview-viewport');
 const previewStage = document.getElementById('preview-stage');
 const zoomLabel = document.getElementById('zoom-label');
@@ -192,14 +191,22 @@ function setStatus(text, isError = false) {
   statusText.parentElement.classList.toggle('error', isError);
 }
 
-function showError(message) {
-  if (!message) {
-    errorBanner.classList.add('hidden');
-    errorBanner.textContent = '';
-    return;
-  }
-  errorBanner.textContent = message;
-  errorBanner.classList.remove('hidden');
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function showRenderError(message) {
+  currentSvg = null;
+  view.baseWidth = 0;
+  view.baseHeight = 0;
+  output.innerHTML = `<div class="render-error" role="alert">
+    <p class="render-error-title">${escapeHtml(t('statusSyntaxError'))}</p>
+    <pre class="render-error-detail">${escapeHtml(message)}</pre>
+  </div>`;
 }
 
 let toastTimer = null;
@@ -289,7 +296,6 @@ async function renderDiagram() {
     view.baseWidth = 0;
     view.baseHeight = 0;
     setStatus(t('statusNeedInput'));
-    showError(null);
     return;
   }
 
@@ -307,7 +313,6 @@ async function renderDiagram() {
     view.y = 0;
     cacheSvgBaseSize();
     setStatus(t('statusRenderOk'));
-    showError(null);
     requestAnimationFrame(() => {
       applyTransform();
       fitToView();
@@ -316,7 +321,7 @@ async function renderDiagram() {
     if (id !== renderId) return;
     const msg = err?.message || String(err);
     setStatus(t('statusSyntaxError'), true);
-    showError(msg);
+    showRenderError(msg);
   }
 }
 
@@ -713,12 +718,10 @@ function exportPng(scale = getRasterExportScale()) {
     .then((dataUrl) => {
       downloadDataUrl(dataUrl, `mermaid-diagram-${Date.now()}.png`);
       setStatus(t('statusExportedPng'));
-      showError(null);
     })
     .catch((err) => {
       const message = err?.message || String(err);
-      setStatus(t('statusExportFail'), true);
-      showError(t('exportFailDetail', { msg: message }));
+      setStatus(t('exportFailDetail', { msg: message }), true);
     });
 }
 
@@ -730,8 +733,7 @@ async function copyImageToClipboard() {
   }
 
   if (!window.isSecureContext || !navigator.clipboard?.write) {
-    setStatus(t('copyImageFail'), true);
-    showError(t('copyImageFailDetail', { msg: 'Clipboard API unavailable' }));
+    setStatus(t('copyImageFailDetail', { msg: 'Clipboard API unavailable' }), true);
     return;
   }
 
@@ -741,11 +743,9 @@ async function copyImageToClipboard() {
     await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
     setStatus(t('copyImageOk'));
     showToast(t('copyImageToast'));
-    showError(null);
   } catch (err) {
     const message = err?.message || String(err);
-    setStatus(t('copyImageFail'), true);
-    showError(t('copyImageFailDetail', { msg: message }));
+    setStatus(t('copyImageFailDetail', { msg: message }), true);
   }
 }
 
