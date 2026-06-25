@@ -183,6 +183,17 @@ function initMermaid(theme) {
     look: uiState.handDrawn ? 'handDrawn' : 'classic',
     securityLevel: 'loose',
     fontFamily: SAFE_FONT_FAMILY,
+    // mermaid.render() without a container appends temp divs to document.body;
+    // on error it throws before removeTempElements(), leaving bomb-icon SVGs behind.
+    suppressErrorRendering: true,
+  });
+}
+
+/** Remove mermaid.render() scratch nodes leaked onto document.body after failed renders. */
+function cleanupMermaidRenderArtifacts() {
+  document.querySelectorAll('div[id^="ddiagram-"]').forEach((node) => node.remove());
+  document.querySelectorAll('svg[id^="diagram-"]').forEach((node) => {
+    if (!output.contains(node)) node.remove();
   });
 }
 
@@ -300,12 +311,14 @@ async function renderDiagram() {
   }
 
   setStatus(t('statusRendering'));
+  cleanupMermaidRenderArtifacts();
 
   try {
     initMermaid(themeSelect.value);
     const { svg } = await mermaid.render(`diagram-${Date.now()}`, source);
     if (id !== renderId) return;
 
+    cleanupMermaidRenderArtifacts();
     output.innerHTML = svg;
     currentSvg = output.querySelector('svg');
     view.scale = 1;
@@ -319,6 +332,7 @@ async function renderDiagram() {
     });
   } catch (err) {
     if (id !== renderId) return;
+    cleanupMermaidRenderArtifacts();
     const msg = err?.message || String(err);
     setStatus(t('statusSyntaxError'), true);
     showRenderError(msg);
